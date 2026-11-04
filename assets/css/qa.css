@@ -112,3 +112,40 @@
   .stage { opacity: 1; transform: none; }
   .pipeline::after { transform: none !important; }
 }
+
+/* ===== image view button (eye on hover) ===== */
+.photo-frame { position: relative; }
+.view-btn { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; width: 100%; height: 100%; padding: 0; border: 0; background: rgba(8, 16, 31, 0); cursor: zoom-in; transition: background .25s; }
+.view-eye { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: rgba(255, 255, 255, .95); color: #0f1b2d; box-shadow: 0 8px 24px rgba(0, 0, 0, .25); opacity: 0; transform: scale(.8); transition: opacity .25s, transform .25s; }
+.view-eye .ic { width: 24px; height: 24px; }
+.view-btn:hover, .view-btn:focus-visible { background: rgba(8, 16, 31, .38); }
+.view-btn:hover .view-eye, .view-btn:focus-visible .view-eye { opacity: 1; transform: none; }
+.view-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; border-radius: inherit; }
+.proj-cat { z-index: 2; }
+/* touch screens have no hover: show a small eye in the corner */
+@media (hover: none) {
+  .view-btn { place-items: end; padding: 10px; }
+  .view-eye { width: 38px; height: 38px; opacity: 1; transform: none; }
+  .view-eye .ic { width: 18px; height: 18px; }
+  .view-btn:hover { background: transparent; }
+}
+
+/* ===== lightbox ===== */
+body.lb-open { overflow: hidden; }
+.lightbox { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 64px 16px 24px; background: rgba(6, 11, 22, .92); animation: lbIn .2s ease; }
+@keyframes lbIn { from { opacity: 0; } }
+.lb-fig { margin: 0; flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+.lb-img { max-width: 100%; max-height: calc(100% - 40px); object-fit: contain; border-radius: 10px; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); background: #fff; }
+.lb-cap { color: #dbe3ee; font: 500 14px var(--font); text-align: center; }
+.lb-btn { flex: none; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .08); color: #fff; cursor: pointer; transition: background .2s; }
+.lb-btn:hover { background: rgba(255, 255, 255, .2); }
+.lb-btn .ic { width: 22px; height: 22px; }
+.lb-close { position: absolute; top: 12px; right: 16px; }
+.lightbox.single .lb-prev, .lightbox.single .lb-next { display: none; }
+@media (max-width: 640px) {
+  .lightbox { padding: 64px 8px 16px; }
+  .lb-prev, .lb-next { position: absolute; bottom: 16px; }
+  .lb-prev { left: calc(50% - 56px); }
+  .lb-next { right: calc(50% - 56px); }
+  .lb-fig { padding-bottom: 60px; }
+}

@@ -32,6 +32,12 @@
   var NAV_SKIP = ['leadership', 'references']; // reachable by scrolling; keeps the top bar short
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* eye button laid over an image; opens the image viewer */
+  function viewBtn(path, caption) {
+    return '<button type="button" class="view-btn" data-view="' + esc(src(path)) + '" data-caption="' + esc(caption) + '" aria-label="View image: ' + esc(caption) + '">' +
+      '<span class="view-eye">' + icon('eye') + '</span></button>';
+  }
+
   /* number "1.5+", "<5 min", "82.9%" -> animated count-up */
   function countMarkup(value) {
     var m = String(value || '').match(/^(\D*?)(\d+(?:\.\d+)?)(.*)$/);
@@ -71,7 +77,7 @@
     $('#heroText').innerHTML = html;
 
     var v = '<div class="inspect"><span class="inspect-tag mono">locator(\'#' + esc(String(h.firstName || 'me').toLowerCase()) + '\') <b>' + icon('check') + 'visible</b></span><i class="hd tl"></i><i class="hd tr"></i><i class="hd bl"></i><i class="hd br"></i><div class="photo-frame">';
-    if (h.profileImage) v += '<img src="' + esc(src(h.profileImage)) + '" alt="Photo of ' + esc((h.firstName || '') + ' ' + (h.lastName || '')) + '" width="420" height="420" fetchpriority="high" />';
+    if (h.profileImage) v += '<img src="' + esc(src(h.profileImage)) + '" alt="Photo of ' + esc((h.firstName || '') + ' ' + (h.lastName || '')) + '" width="420" height="420" fetchpriority="high" />' + viewBtn(h.profileImage, (h.firstName || '') + ' ' + (h.lastName || ''));
     else v += '<div class="photo-ph">' + icon('user') + '</div>';
     v += '</div><span class="scanline" aria-hidden="true"></span></div>';
     var lines = filled(h.terminalLines);
@@ -171,7 +177,7 @@
         ? '<img src="' + esc(src(p.image)) + '" alt="" loading="lazy" />'
         : '<div class="proj-ph">' + icon(p.category === 'API' ? 'database' : p.category === 'Performance' ? 'activity' : p.category === 'Manual' ? 'bug' : 'terminal') + '<span>' + esc(p.category || 'Project') + '</span></div>';
       return '<article class="card proj reveal" data-cat="' + esc(p.category || '') + '">' +
-        '<div class="proj-media">' + media + (p.category ? '<span class="proj-cat">' + esc(p.category) + '</span>' : '') + '</div>' +
+        '<div class="proj-media">' + media + (p.image ? viewBtn(p.image, p.title) : '') + (p.category ? '<span class="proj-cat">' + esc(p.category) + '</span>' : '') + '</div>' +
         '<div class="proj-body"><p class="proj-id mono">' + id + '<span class="ok">' + icon('check') + 'verified</span></p><h3>' + esc(p.title) + '</h3><p>' + esc(p.description) + '</p>' +
         (metrics.length ? '<div class="proj-metrics">' + metrics.map(function (m) { return '<div><b>' + countMarkup(m.value) + '</b><span>' + esc(m.label) + '</span></div>'; }).join('') + '</div>' : '') +
         (filled(p.tags).length ? '<div class="tags">' + filled(p.tags).map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
@@ -435,6 +441,13 @@
   menuBtn.addEventListener('click', function () { setMenu(!document.body.classList.contains('menu-open')); });
   $('#navLinks').addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+  /* tapping anywhere outside the dropdown closes it */
+  document.addEventListener('click', function (e) {
+    if (!document.body.classList.contains('menu-open')) return;
+    /* composedPath is captured at dispatch, so it still works after the menu icon is swapped out */
+    var inNav = e.composedPath().some(function (el) { return el.id === 'nav'; });
+    if (!inNav) setMenu(false);
+  });
 
   $('#toTop').innerHTML = icon('arrowUp');
   var bar = $('#progressBar');
@@ -469,6 +482,78 @@
     }).catch(function () {
       st.innerHTML = 'Could not send right now. Please email me at <a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>.'; st.className = 'form-status err';
     }).then(function () { btn.disabled = false; });
+  });
+
+  /* ---------- image viewer ---------- */
+  var lb = document.createElement('div');
+  lb.className = 'lightbox';
+  lb.hidden = true;
+  lb.setAttribute('role', 'dialog');
+  lb.setAttribute('aria-modal', 'true');
+  lb.setAttribute('aria-label', 'Image viewer');
+  lb.innerHTML =
+    '<button type="button" class="lb-btn lb-close" aria-label="Close">' + icon('x') + '</button>' +
+    '<button type="button" class="lb-btn lb-prev" aria-label="Previous image">' + icon('chevronLeft') + '</button>' +
+    '<figure class="lb-fig"><img class="lb-img" alt="" /><figcaption class="lb-cap"></figcaption></figure>' +
+    '<button type="button" class="lb-btn lb-next" aria-label="Next image">' + icon('chevronRight') + '</button>';
+  document.body.appendChild(lb);
+  var lbImg = lb.querySelector('.lb-img'), lbCap = lb.querySelector('.lb-cap');
+  var gallery = [], gIndex = 0, lastFocus = null;
+
+  function showItem(i) {
+    gIndex = (i + gallery.length) % gallery.length;
+    var b = gallery[gIndex];
+    lbImg.src = b.getAttribute('data-view');
+    lbImg.alt = b.getAttribute('data-caption');
+    lbCap.textContent = b.getAttribute('data-caption') + (gallery.length > 1 ? '  ·  ' + (gIndex + 1) + ' / ' + gallery.length : '');
+    lb.classList.toggle('single', gallery.length < 2);
+  }
+  function openViewer(btn) {
+    /* only images currently on screen (respects the project filter) */
+    gallery = [].filter.call(document.querySelectorAll('.view-btn'), function (b) { return b.offsetParent !== null; });
+    var i = gallery.indexOf(btn);
+    if (i < 0) { gallery = [btn]; i = 0; }
+    lastFocus = btn;
+    showItem(i);
+    lb.hidden = false;
+    document.body.classList.add('lb-open');
+    lb.querySelector('.lb-close').focus();
+  }
+  function closeViewer() {
+    lb.hidden = true;
+    lbImg.removeAttribute('src');
+    document.body.classList.remove('lb-open');
+    if (lastFocus) lastFocus.focus();
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.view-btn');
+    if (b) { e.preventDefault(); openViewer(b); }
+  });
+  lb.addEventListener('click', function (e) {
+    if (e.target.closest('.lb-close') || e.target === lb || e.target.classList.contains('lb-fig')) closeViewer();
+    else if (e.target.closest('.lb-prev')) showItem(gIndex - 1);
+    else if (e.target.closest('.lb-next')) showItem(gIndex + 1);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') closeViewer();
+    else if (e.key === 'ArrowLeft') showItem(gIndex - 1);
+    else if (e.key === 'ArrowRight') showItem(gIndex + 1);
+    else if (e.key === 'Tab') {
+      /* keep focus inside the viewer */
+      var f = [].filter.call(lb.querySelectorAll('button'), function (x) { return x.offsetParent !== null; });
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  var touchX = null;
+  lb.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', function (e) {
+    if (touchX === null || gallery.length < 2) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) showItem(gIndex + (dx < 0 ? 1 : -1));
+    touchX = null;
   });
 
   /* ---------- load ---------- */
