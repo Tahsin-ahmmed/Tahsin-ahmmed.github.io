@@ -10,9 +10,9 @@
       "about": true,
       "experience": true,
       "projects": true,
-      "skills": true,
       "publications": true,
       "process": true,
+      "skills": true,
       "education": true,
       "leadership": true,
       "references": false,
@@ -514,7 +514,7 @@
       "degree": "Higher Secondary Certificate (HSC)",
       "institute": "Moulovi Abdul Hye Memorial School & College",
       "period": "2019",
-      "result": "GPA 4.67 / 5.00"
+      "result": "GPA 4.87 / 5.00"
     }
   ],
   "achievements": [
