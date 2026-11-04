@@ -34,11 +34,31 @@
     "terminalLines": []
   },
   "socials": [
-    { "label": "GitHub", "icon": "github", "url": "https://github.com/Tahsin-ahmmed" },
-    { "label": "LinkedIn", "icon": "linkedin", "url": "https://www.linkedin.com/in/taahsin-ahmmed/" },
-    { "label": "Email", "icon": "mail", "url": "mailto:tahsinahmmed222@gmail.com" },
-    { "label": "WhatsApp", "icon": "whatsapp", "url": "https://wa.me/8801744688444" },
-    { "label": "Facebook", "icon": "facebook", "url": "https://www.facebook.com/t.ahmmed222/" }
+    {
+      "label": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/Tahsin-ahmmed"
+    },
+    {
+      "label": "LinkedIn",
+      "icon": "linkedin",
+      "url": "https://www.linkedin.com/in/taahsin-ahmmed/"
+    },
+    {
+      "label": "Email",
+      "icon": "mail",
+      "url": "mailto:tahsinahmmed222@gmail.com"
+    },
+    {
+      "label": "WhatsApp",
+      "icon": "whatsapp",
+      "url": "https://wa.me/8801744688444"
+    },
+    {
+      "label": "Facebook",
+      "icon": "facebook",
+      "url": "https://www.facebook.com/t.ahmmed222/"
+    }
   ],
   "about": {
     "heading": "Quality is a habit, not a phase",
@@ -48,14 +68,32 @@
       "I graduated in Computer Science and Engineering from Green University of Bangladesh with a 3.84 CGPA, and have co-authored research on carbon-neutral edge computing published at IEEE SMC 2025."
     ],
     "stats": [
-      { "value": "1.5+", "label": "Years in QA" },
-      { "value": "8+", "label": "QA projects" },
-      { "value": "3.84", "label": "CGPA" },
-      { "value": "2", "label": "Publications" }
+      {
+        "value": "1.5+",
+        "label": "Years in QA"
+      },
+      {
+        "value": "8+",
+        "label": "QA projects"
+      },
+      {
+        "value": "3.84",
+        "label": "CGPA"
+      },
+      {
+        "value": "2",
+        "label": "Publications"
+      }
     ],
     "languages": [
-      { "name": "English", "level": "Proficient" },
-      { "name": "Bengali", "level": "Native" }
+      {
+        "name": "English",
+        "level": "Proficient"
+      },
+      {
+        "name": "Bengali",
+        "level": "Native"
+      }
     ]
   },
   "experience": [
@@ -70,7 +108,14 @@
         "Design, develop and execute automated test scripts for the OptimalMD staging platform using Python and Playwright.",
         "Identify, document and track defects in Linear, writing detailed bug reports and working with developers through to resolution."
       ],
-      "tags": ["Playwright", "Python", "pytest", "Linear", "Regression", "Exploratory"]
+      "tags": [
+        "Playwright",
+        "Python",
+        "pytest",
+        "Linear",
+        "Regression",
+        "Exploratory"
+      ]
     },
     {
       "company": "Join Venture AI",
@@ -83,7 +128,13 @@
         "Conducted API testing with Postman and performance testing with Apache JMeter to evaluate functionality, reliability and performance.",
         "Analyzed business requirements and technical specifications to prepare test documentation, and collaborated with developers and cross-functional teams in Agile sprints."
       ],
-      "tags": ["Playwright", "Postman", "JMeter", "Jira", "Agile"]
+      "tags": [
+        "Playwright",
+        "Postman",
+        "JMeter",
+        "Jira",
+        "Agile"
+      ]
     },
     {
       "company": "QA Harbor Limited",
@@ -96,39 +147,92 @@
         "Assisted in Selenium automation setup and participated in security testing activities.",
         "Collaborated within Agile teams using SDLC and STLC practices to identify defects and improve application quality."
       ],
-      "tags": ["Selenium", "Manual Testing", "Security Testing", "SDLC/STLC"]
+      "tags": [
+        "Selenium",
+        "Manual Testing",
+        "Security Testing",
+        "SDLC/STLC"
+      ]
     }
   ],
   "skills": [
     {
       "title": "Testing",
       "icon": "shield",
-      "items": ["Manual", "Automation", "Functional", "Regression", "Smoke", "Exploratory", "Usability", "API", "Load", "Stress", "Database"]
+      "items": [
+        "Manual",
+        "Automation",
+        "Functional",
+        "Regression",
+        "Smoke",
+        "Exploratory",
+        "Usability",
+        "API",
+        "Load",
+        "Stress",
+        "Database"
+      ]
     },
     {
       "title": "Automation & Tools",
       "icon": "bot",
-      "items": ["Playwright", "Selenium WebDriver", "pytest", "Postman", "Newman", "Apache JMeter"]
+      "items": [
+        "Playwright",
+        "Selenium WebDriver",
+        "pytest",
+        "Postman",
+        "Newman",
+        "Apache JMeter"
+      ]
     },
     {
       "title": "Tracking & Process",
       "icon": "bug",
-      "items": ["Linear", "Jira", "Agile", "Scrum", "SDLC", "STLC", "CI/CD (basic)"]
+      "items": [
+        "Linear",
+        "Jira",
+        "Agile",
+        "Scrum",
+        "SDLC",
+        "STLC",
+        "CI/CD (basic)"
+      ]
     },
     {
       "title": "Languages & Data",
       "icon": "code",
-      "items": ["Python", "Java", "C/C++", "SQL", "MySQL"]
+      "items": [
+        "Python",
+        "Java",
+        "C/C++",
+        "SQL",
+        "MySQL"
+      ]
     },
     {
       "title": "Dev Tools & OS",
       "icon": "wrench",
-      "items": ["Git", "GitHub", "VS Code", "IntelliJ IDEA", "Linux (Ubuntu)", "Windows", "macOS"]
+      "items": [
+        "Git",
+        "GitHub",
+        "VS Code",
+        "IntelliJ IDEA",
+        "Linux (Ubuntu)",
+        "Windows",
+        "macOS"
+      ]
     },
     {
       "title": "Soft Skills",
       "icon": "users",
-      "items": ["Problem-Solving", "Communication", "Team Collaboration", "Critical Thinking", "Leadership", "Time Management"]
+      "items": [
+        "Problem-Solving",
+        "Communication",
+        "Team Collaboration",
+        "Critical Thinking",
+        "Leadership",
+        "Time Management"
+      ]
     }
   ],
   "projects": [
@@ -136,12 +240,28 @@
       "title": "OptimalMD Member Portal – Test Automation Suite",
       "category": "Automation",
       "featured": true,
-      "image": "",
+      "image": "uploads/home-page-mw1qgbm2.webp",
       "description": "Playwright + pytest suite (Page Object Model) for a healthcare portal covering registration, Stripe payments, email/OTP verification over IMAP, profile activation, dashboard services and dependents. Runs 30+ tests in under 5 minutes, with a custom Flask runner that shows a live browser view and step-by-step results.",
-      "tags": ["Playwright", "pytest", "Python", "POM", "Stripe", "IMAP", "Flask"],
+      "tags": [
+        "Playwright",
+        "pytest",
+        "Python",
+        "POM",
+        "Stripe",
+        "IMAP",
+        "Flask"
+      ],
       "links": [
-        { "label": "GitHub", "icon": "github", "url": "" },
-        { "label": "Demo Video", "icon": "video", "url": "" }
+        {
+          "label": "GitHub",
+          "icon": "github",
+          "url": ""
+        },
+        {
+          "label": "Demo Video",
+          "icon": "video",
+          "url": ""
+        }
       ]
     },
     {
@@ -150,10 +270,23 @@
       "featured": false,
       "image": "uploads/advantageShopping.png",
       "description": "Manual and automated testing of the Advantage Shopping web app using Playwright with Python. Designed and executed test cases to validate functionality, find bugs and check cross-browser compatibility.",
-      "tags": ["Playwright", "Python", "Page Object Model", "Cross-Browser"],
+      "tags": [
+        "Playwright",
+        "Python",
+        "Page Object Model",
+        "Cross-Browser"
+      ],
       "links": [
-        { "label": "GitHub", "icon": "github", "url": "https://github.com/Tahsin-ahmmed/Advantage-Shopping-Autamation-Testing" },
-        { "label": "Bug Report", "icon": "sheet", "url": "" }
+        {
+          "label": "GitHub",
+          "icon": "github",
+          "url": "https://github.com/Tahsin-ahmmed/Advantage-Shopping-Autamation-Testing"
+        },
+        {
+          "label": "Bug Report",
+          "icon": "sheet",
+          "url": ""
+        }
       ]
     },
     {
@@ -162,9 +295,18 @@
       "featured": false,
       "image": "uploads/restfulBooker.png",
       "description": "Automated authentication and booking CRUD workflows in Postman with dynamic variables, pre/post scripts and response assertions. Ran collections with Newman to generate HTML test reports.",
-      "tags": ["Postman", "Newman", "JavaScript", "REST API"],
+      "tags": [
+        "Postman",
+        "Newman",
+        "JavaScript",
+        "REST API"
+      ],
       "links": [
-        { "label": "GitHub", "icon": "github", "url": "https://github.com/Tahsin-ahmmed/Restful-booker-API-Testing" }
+        {
+          "label": "GitHub",
+          "icon": "github",
+          "url": "https://github.com/Tahsin-ahmmed/Restful-booker-API-Testing"
+        }
       ]
     },
     {
@@ -173,9 +315,18 @@
       "featured": false,
       "image": "uploads/restfulBookerJmeter.png",
       "description": "Load test scenarios in Apache JMeter with assertions and pre/post-processors for dynamic data. Executed via CLI and generated HTML reports to analyze response time, throughput and system performance.",
-      "tags": ["JMeter", "Load Testing", "Stress Testing", "CLI"],
+      "tags": [
+        "JMeter",
+        "Load Testing",
+        "Stress Testing",
+        "CLI"
+      ],
       "links": [
-        { "label": "GitHub", "icon": "github", "url": "https://github.com/Tahsin-ahmmed/Restful-booker-Performance-Testing" }
+        {
+          "label": "GitHub",
+          "icon": "github",
+          "url": "https://github.com/Tahsin-ahmmed/Restful-booker-Performance-Testing"
+        }
       ]
     },
     {
@@ -184,9 +335,18 @@
       "featured": false,
       "image": "uploads/luxuryOps.png",
       "description": "End-to-end manual testing focused on UI/UX and usability. Documented bugs in a structured report highlighting user experience inconsistencies.",
-      "tags": ["Manual Testing", "UI/UX", "Usability", "Bug Reporting"],
+      "tags": [
+        "Manual Testing",
+        "UI/UX",
+        "Usability",
+        "Bug Reporting"
+      ],
       "links": [
-        { "label": "Bug Report", "icon": "sheet", "url": "https://docs.google.com/spreadsheets/d/1dyLUo0DS9bVdmJ62zU1Qid8meOJzWOLNazZ2BkWDGSI/edit?gid=0#gid=0" }
+        {
+          "label": "Bug Report",
+          "icon": "sheet",
+          "url": "https://docs.google.com/spreadsheets/d/1dyLUo0DS9bVdmJ62zU1Qid8meOJzWOLNazZ2BkWDGSI/edit?gid=0#gid=0"
+        }
       ]
     },
     {
@@ -195,10 +355,22 @@
       "featured": false,
       "image": "uploads/spacex.png",
       "description": "End-to-end manual testing of core functional workflows. Analyzed business requirement documents and built a structured feature list to support requirement tracking and test planning.",
-      "tags": ["Functional Testing", "Requirement Analysis", "Test Planning"],
+      "tags": [
+        "Functional Testing",
+        "Requirement Analysis",
+        "Test Planning"
+      ],
       "links": [
-        { "label": "Bug Report", "icon": "sheet", "url": "https://docs.google.com/spreadsheets/d/1fZrJIhmDxsR4yothkNRI9Zbp3Z4v3yd1waQ7w07ACM0/edit?gid=0#gid=0" },
-        { "label": "Feature List", "icon": "file", "url": "https://docs.google.com/spreadsheets/d/1wsWeIyDIkOx9sQ7PiI66m1VnBsYGa44di4nzL_WM6kI/edit?gid=0#gid=0" }
+        {
+          "label": "Bug Report",
+          "icon": "sheet",
+          "url": "https://docs.google.com/spreadsheets/d/1fZrJIhmDxsR4yothkNRI9Zbp3Z4v3yd1waQ7w07ACM0/edit?gid=0#gid=0"
+        },
+        {
+          "label": "Feature List",
+          "icon": "file",
+          "url": "https://docs.google.com/spreadsheets/d/1wsWeIyDIkOx9sQ7PiI66m1VnBsYGa44di4nzL_WM6kI/edit?gid=0#gid=0"
+        }
       ]
     },
     {
@@ -207,9 +379,17 @@
       "featured": false,
       "image": "uploads/quran.png",
       "description": "End-to-end functional testing of a mobile/web app: validated core features, reported defects with clear reproduction steps and tracked them through requirement-based test execution.",
-      "tags": ["Mobile Testing", "Functional Testing", "Defect Tracking"],
+      "tags": [
+        "Mobile Testing",
+        "Functional Testing",
+        "Defect Tracking"
+      ],
       "links": [
-        { "label": "Bug Report", "icon": "sheet", "url": "https://docs.google.com/spreadsheets/d/1CmqtBxq9iosd98xxxrkGMdd2nHyhhDl_OektOp4VIL0/edit?gid=0#gid=0" }
+        {
+          "label": "Bug Report",
+          "icon": "sheet",
+          "url": "https://docs.google.com/spreadsheets/d/1CmqtBxq9iosd98xxxrkGMdd2nHyhhDl_OektOp4VIL0/edit?gid=0#gid=0"
+        }
       ]
     }
   ],
@@ -244,9 +424,21 @@
     }
   ],
   "achievements": [
-    { "icon": "medal", "title": "VC's Certificate", "description": "Awarded for a GPA of 3.90–4.00 in Spring '23 and Spring '25." },
-    { "icon": "award", "title": "Dean's Certificate", "description": "Awarded for a GPA of 3.80–3.89 in Fall '21, Summer '22, Fall '23, Spring '24 and Fall '24." },
-    { "icon": "trophy", "title": "Best Volunteer Award", "description": "Best Computer Society Student Volunteer in Bangladesh, 2024." }
+    {
+      "icon": "medal",
+      "title": "VC's Certificate",
+      "description": "Awarded for a GPA of 3.90–4.00 in Spring '23 and Spring '25."
+    },
+    {
+      "icon": "award",
+      "title": "Dean's Certificate",
+      "description": "Awarded for a GPA of 3.80–3.89 in Fall '21, Summer '22, Fall '23, Spring '24 and Fall '24."
+    },
+    {
+      "icon": "trophy",
+      "title": "Best Volunteer Award",
+      "description": "Best Computer Society Student Volunteer in Bangladesh, 2024."
+    }
   ],
   "leadership": [
     {
