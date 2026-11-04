@@ -28,7 +28,7 @@
   function list(a) { return Array.isArray(a) ? a : []; }
   function filled(a) { return list(a).filter(function (x) { return x && (typeof x === 'string' ? x.trim() : true); }); }
 
-  var SECTION_ORDER = ['about', 'experience', 'projects', 'publications', 'process', 'skills', 'education', 'leadership', 'references', 'contact'];
+  var SECTION_ORDER = ['about', 'experience', 'projects', 'skills', 'publications', 'process', 'education', 'leadership', 'references', 'contact'];
   var NAV_SKIP = ['leadership', 'references']; // reachable by scrolling; keeps the top bar short
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
