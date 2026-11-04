@@ -28,7 +28,7 @@
   function list(a) { return Array.isArray(a) ? a : []; }
   function filled(a) { return list(a).filter(function (x) { return x && (typeof x === 'string' ? x.trim() : true); }); }
 
-  var SECTION_ORDER = ['about', 'projects', 'experience', 'publications', 'process', 'skills', 'education', 'leadership', 'references', 'contact'];
+  var SECTION_ORDER = ['about', 'experience', 'projects', 'publications', 'process', 'skills', 'education', 'leadership', 'references', 'contact'];
   var NAV_SKIP = ['leadership', 'references']; // reachable by scrolling; keeps the top bar short
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -92,7 +92,7 @@
     if (stats.length || tools.length) {
       s += '<div class="snap-head mono"><span>' + icon('activity') + 'qa-snapshot</span><span class="pass">' + icon('check') + 'all checks passed</span></div>';
       if (stats.length) {
-        s += '<div class="snap-grid">' + stats.map(function (st) {
+        s += '<div class="snap-grid n' + stats.length + '">' + stats.map(function (st) {
           return '<div class="snap-cell"><b>' + countMarkup(st.value) + '</b><span>' + esc(st.label) + '</span></div>';
         }).join('') + '</div>';
       }

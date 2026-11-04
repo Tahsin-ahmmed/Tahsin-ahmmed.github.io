@@ -234,7 +234,7 @@
 
   /* ================= schema ================= */
   var ICON_NAMES = Object.keys(window.ICONS).sort();
-  var SECTION_LABELS = { about: 'About', projects: 'Projects', experience: 'Experience', publications: 'Publications / Research', process: 'How I test (process)', skills: 'Skills', education: 'Education & achievements', leadership: 'Leadership & volunteering', references: 'References', contact: 'Contact' };
+  var SECTION_LABELS = { about: 'About', experience: 'Experience', projects: 'Projects', publications: 'Publications / Research', process: 'How I test (process)', skills: 'Skills', education: 'Education & achievements', leadership: 'Leadership & volunteering', references: 'References', contact: 'Contact' };
 
   var T = {
     hero: { label: 'Intro', icon: 'user', blocks: [
@@ -362,7 +362,7 @@
       ] }
     ] }
   };
-  var TAB_ORDER = ['hero', 'about', 'projects', 'experience', 'publications', 'process', 'skills', 'education', 'leadership', 'references', 'contact', 'site'];
+  var TAB_ORDER = ['hero', 'about', 'experience', 'projects', 'publications', 'process', 'skills', 'education', 'leadership', 'references', 'contact', 'site'];
 
   /* ================= field renderers ================= */
   function fieldWrap(f, control) {

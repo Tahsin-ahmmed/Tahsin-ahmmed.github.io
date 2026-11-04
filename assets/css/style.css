@@ -1,18 +1,18 @@
 /* ===== Tokens ===== */
 :root {
-  --bg: #f6f6f2;
-  --bg-alt: #eeeee8;
+  --bg: #f6f8fb;
+  --bg-alt: #edf1f7;
   --surface: #ffffff;
-  --ink: #12161b;
-  --ink-2: #39414b;
-  --muted: #646d78;
-  --line: #e1e1da;
-  --accent: #0b8a5f;
+  --ink: #0f1b2d;
+  --ink-2: #334155;
+  --muted: #5f6b7d;
+  --line: #dde4ee;
+  --accent: #1d4ed8;
   --accent-ink: #ffffff;
-  --accent-soft: rgba(11, 138, 95, .1);
-  --term-bg: #0f1418;
+  --accent-soft: rgba(29, 78, 216, .08);
+  --term-bg: #0b1426;
   --term-ink: #cfd8dc;
-  --shadow: 0 1px 2px rgba(16, 24, 32, .04), 0 8px 24px rgba(16, 24, 32, .06);
+  --shadow: 0 1px 2px rgba(15, 27, 45, .04), 0 8px 24px rgba(15, 27, 45, .07);
   --radius: 14px;
   --font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
@@ -22,17 +22,17 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0d1014; --bg-alt: #11161b; --surface: #161c22; --ink: #e9edf0; --ink-2: #c3cad1;
-    --muted: #8f99a3; --line: #252d35; --accent: #3ddc97; --accent-ink: #062016;
-    --accent-soft: rgba(61, 220, 151, .1); --term-bg: #0a0e11;
+    --bg: #0a1020; --bg-alt: #0e1628; --surface: #131d33; --ink: #e6ebf3; --ink-2: #c0cad8;
+    --muted: #8a97ab; --line: #22304a; --accent: #60a5fa; --accent-ink: #071226;
+    --accent-soft: rgba(96, 165, 250, .12); --term-bg: #08101f;
     --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0d1014; --bg-alt: #11161b; --surface: #161c22; --ink: #e9edf0; --ink-2: #c3cad1;
-  --muted: #8f99a3; --line: #252d35; --accent: #3ddc97; --accent-ink: #062016;
-  --accent-soft: rgba(61, 220, 151, .1); --term-bg: #0a0e11;
+  --bg: #0a1020; --bg-alt: #0e1628; --surface: #131d33; --ink: #e6ebf3; --ink-2: #c0cad8;
+  --muted: #8a97ab; --line: #22304a; --accent: #60a5fa; --accent-ink: #071226;
+  --accent-soft: rgba(96, 165, 250, .12); --term-bg: #08101f;
   --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
   color-scheme: dark;
 }

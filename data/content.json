@@ -8,8 +8,8 @@
     "footerText": "Designed, built and tested by Tahsin Ahmmed.",
     "sections": {
       "about": true,
-      "projects": true,
       "experience": true,
+      "projects": true,
       "publications": true,
       "process": true,
       "skills": true,
@@ -86,16 +86,12 @@
     ],
     "stats": [
       {
-        "value": "1.5+",
+        "value": "2+",
         "label": "Years in QA"
       },
       {
         "value": "30+",
         "label": "Automated E2E tests"
-      },
-      {
-        "value": "100+",
-        "label": "Bugs reported"
       },
       {
         "value": "2",
