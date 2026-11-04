@@ -234,7 +234,7 @@
 
   /* ================= schema ================= */
   var ICON_NAMES = Object.keys(window.ICONS).sort();
-  var SECTION_LABELS = { about: 'About', experience: 'Experience', skills: 'Skills', projects: 'Projects', publications: 'Publications / Research', education: 'Education & achievements', leadership: 'Leadership & volunteering', references: 'References', contact: 'Contact' };
+  var SECTION_LABELS = { about: 'About', projects: 'Projects', experience: 'Experience', publications: 'Publications / Research', process: 'How I test (process)', skills: 'Skills', education: 'Education & achievements', leadership: 'Leadership & volunteering', references: 'References', contact: 'Contact' };
 
   var T = {
     hero: { label: 'Intro', icon: 'user', blocks: [
@@ -244,14 +244,15 @@
         { k: 'firstName', t: 'text', l: 'First name', half: true },
         { k: 'lastName', t: 'text', l: 'Last name', half: true, hint: 'Shown in the accent colour.' },
         { k: 'role', t: 'text', l: 'Job title' },
+        { k: 'focusPrefix', t: 'text', l: 'Specialty line prefix', hint: 'e.g. "Specialized in". The focus areas below type out after it, one by one.' },
+        { k: 'focusAreas', t: 'list', l: 'Focus areas', short: true, hint: 'Also shown as the "What I test" checklist in About.' },
         { k: 'summary', t: 'textarea', l: 'Short summary' },
+        { k: 'tools', t: 'tags', l: 'Toolchain (QA snapshot strip)' },
         { k: 'showStatus', t: 'bool', l: 'Show availability badge' },
         { k: 'status', t: 'text', l: 'Availability text' },
         { k: 'location', t: 'text', l: 'Location' },
         { k: 'cvFile', t: 'file', l: 'CV / Resume (PDF)', accept: 'application/pdf,.pdf' },
-        { k: 'cvLabel', t: 'text', l: 'CV button text' },
-        { k: 'terminalTitle', t: 'text', l: 'Terminal card title' },
-        { k: 'terminalLines', t: 'list', l: 'Terminal card lines', short: true, hint: 'Start a line with $ for a command, ✓ for a green check, = for a summary line. Remove all lines to hide the card.' }
+        { k: 'cvLabel', t: 'text', l: 'CV button text' }
       ] },
       { k: 'socials', t: 'array', l: 'Social links', title: 'label', single: 'link', newItem: { label: '', icon: 'link', url: '' }, fields: [
         { k: 'label', t: 'text', l: 'Label', half: true },
@@ -263,7 +264,7 @@
       { k: 'about', t: 'group', fields: [
         { k: 'heading', t: 'text', l: 'Heading' },
         { k: 'paragraphs', t: 'list', l: 'Paragraphs' },
-        { k: 'stats', t: 'array', l: 'Stats', title: 'label', single: 'stat', newItem: { value: '', label: '' }, fields: [
+        { k: 'stats', t: 'array', l: 'QA snapshot numbers (shown under the intro)', title: 'label', single: 'number', newItem: { value: '', label: '' }, fields: [
           { k: 'value', t: 'text', l: 'Value', half: true }, { k: 'label', t: 'text', l: 'Label', half: true }
         ] },
         { k: 'languages', t: 'array', l: 'Languages', title: 'name', single: 'language', newItem: { name: '', level: '' }, fields: [
@@ -287,16 +288,25 @@
       ] }
     ] },
     projects: { label: 'Projects', icon: 'code', blocks: [
-      { k: 'projects', t: 'array', l: 'Projects', title: 'title', sub: 'category', single: 'project', newItem: { title: '', category: '', featured: false, image: '', description: '', tags: [], links: [] }, fields: [
+      { k: 'projects', t: 'array', l: 'Projects', title: 'title', sub: 'category', single: 'project', newItem: { title: '', category: '', image: '', description: '', metrics: [], tags: [], links: [] }, fields: [
         { k: 'title', t: 'text', l: 'Title' },
         { k: 'category', t: 'text', l: 'Category', hint: 'Creates filter buttons, e.g. Automation, API, Performance, Manual.' },
         { k: 'image', t: 'image', l: 'Screenshot', max: 1600, hint: 'Leave empty to show a placeholder graphic.' },
         { k: 'description', t: 'textarea', l: 'Description' },
+        { k: 'metrics', t: 'array', l: 'Results (numbers)', title: 'label', single: 'result', newItem: { value: '', label: '' }, fields: [
+          { k: 'value', t: 'text', l: 'Value', half: true, hint: 'e.g. 37, 30+, <5 min' }, { k: 'label', t: 'text', l: 'Label', half: true, hint: 'e.g. Bugs reported' }
+        ] },
         { k: 'tags', t: 'tags', l: 'Tags' },
         { k: 'links', t: 'array', l: 'Links', title: 'label', single: 'link', newItem: { label: '', icon: 'external', url: '' }, fields: [
           { k: 'label', t: 'text', l: 'Label', half: true }, { k: 'icon', t: 'icon', l: 'Icon', half: true },
           { k: 'url', t: 'url', l: 'URL', hint: 'Links with an empty URL are hidden.' }
         ] }
+      ] }
+    ] },
+    process: { label: 'Process', icon: 'activity', blocks: [
+      { k: 'process', t: 'array', l: 'Steps of how you test', title: 'title', single: 'step', newItem: { icon: 'check', title: '', description: '' }, fields: [
+        { k: 'title', t: 'text', l: 'Step name', half: true }, { k: 'icon', t: 'icon', l: 'Icon', half: true },
+        { k: 'description', t: 'textarea', l: 'Description', rows: 2 }
       ] }
     ] },
     publications: { label: 'Research', icon: 'file', blocks: [
@@ -352,7 +362,7 @@
       ] }
     ] }
   };
-  var TAB_ORDER = ['hero', 'about', 'experience', 'skills', 'projects', 'publications', 'education', 'leadership', 'references', 'contact', 'site'];
+  var TAB_ORDER = ['hero', 'about', 'projects', 'experience', 'publications', 'process', 'skills', 'education', 'leadership', 'references', 'contact', 'site'];
 
   /* ================= field renderers ================= */
   function fieldWrap(f, control) {

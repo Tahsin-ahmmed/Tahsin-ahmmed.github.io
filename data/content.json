@@ -8,10 +8,11 @@
     "footerText": "Designed, built and tested by Tahsin Ahmmed.",
     "sections": {
       "about": true,
-      "experience": true,
-      "skills": true,
       "projects": true,
+      "experience": true,
       "publications": true,
+      "process": true,
+      "skills": true,
       "education": true,
       "leadership": true,
       "references": false,
@@ -31,7 +32,23 @@
     "cvFile": "uploads/Tahsin_Ahmmed_CV.pdf",
     "cvLabel": "Download CV",
     "terminalTitle": "optimalmd-e2e",
-    "terminalLines": []
+    "terminalLines": [],
+    "focusPrefix": "Specialized in",
+    "focusAreas": [
+      "test automation",
+      "API testing",
+      "performance testing",
+      "manual & exploratory QA"
+    ],
+    "tools": [
+      "Playwright",
+      "Selenium",
+      "pytest",
+      "Postman",
+      "JMeter",
+      "Linear",
+      "Jira"
+    ]
   },
   "socials": [
     {
@@ -73,16 +90,16 @@
         "label": "Years in QA"
       },
       {
-        "value": "8+",
-        "label": "QA projects"
+        "value": "30+",
+        "label": "Automated E2E tests"
       },
       {
-        "value": "3.84",
-        "label": "CGPA"
+        "value": "100+",
+        "label": "Bugs reported"
       },
       {
         "value": "2",
-        "label": "Publications"
+        "label": "Research papers"
       }
     ],
     "languages": [
@@ -239,7 +256,6 @@
     {
       "title": "OptimalMD Member Portal – Test Automation Suite",
       "category": "Automation",
-      "featured": true,
       "image": "uploads/home-page-mw1qgbm2.webp",
       "description": "Playwright + pytest suite (Page Object Model) for a healthcare portal covering registration, Stripe payments, email/OTP verification over IMAP, profile activation, dashboard services and dependents. Runs 30+ tests in under 5 minutes, with a custom Flask runner that shows a live browser view and step-by-step results.",
       "tags": [
@@ -262,12 +278,25 @@
           "icon": "video",
           "url": ""
         }
+      ],
+      "metrics": [
+        {
+          "value": "30+",
+          "label": "Automated tests"
+        },
+        {
+          "value": "<5 min",
+          "label": "Suite runtime"
+        },
+        {
+          "value": "6",
+          "label": "User flows"
+        }
       ]
     },
     {
       "title": "Advantage Shopping Test Suite",
       "category": "Automation",
-      "featured": false,
       "image": "uploads/advantageShopping.png",
       "description": "Manual and automated testing of the Advantage Shopping web app using Playwright with Python. Designed and executed test cases to validate functionality, find bugs and check cross-browser compatibility.",
       "tags": [
@@ -287,12 +316,12 @@
           "icon": "sheet",
           "url": ""
         }
-      ]
+      ],
+      "metrics": []
     },
     {
       "title": "Restful-booker API (API Testing)",
       "category": "API",
-      "featured": false,
       "image": "uploads/restfulBooker.png",
       "description": "Automated authentication and booking CRUD workflows in Postman with dynamic variables, pre/post scripts and response assertions. Ran collections with Newman to generate HTML test reports.",
       "tags": [
@@ -307,12 +336,21 @@
           "icon": "github",
           "url": "https://github.com/Tahsin-ahmmed/Restful-booker-API-Testing"
         }
+      ],
+      "metrics": [
+        {
+          "value": "24",
+          "label": "Assertions"
+        },
+        {
+          "value": "0",
+          "label": "Failed"
+        }
       ]
     },
     {
       "title": "Restful-booker API (Performance Testing)",
       "category": "Performance",
-      "featured": false,
       "image": "uploads/restfulBookerJmeter.png",
       "description": "Load test scenarios in Apache JMeter with assertions and pre/post-processors for dynamic data. Executed via CLI and generated HTML reports to analyze response time, throughput and system performance.",
       "tags": [
@@ -327,12 +365,12 @@
           "icon": "github",
           "url": "https://github.com/Tahsin-ahmmed/Restful-booker-Performance-Testing"
         }
-      ]
+      ],
+      "metrics": []
     },
     {
       "title": "LuxuryOps Web Application",
       "category": "Manual",
-      "featured": false,
       "image": "uploads/luxuryOps.png",
       "description": "End-to-end manual testing focused on UI/UX and usability. Documented bugs in a structured report highlighting user experience inconsistencies.",
       "tags": [
@@ -347,12 +385,21 @@
           "icon": "sheet",
           "url": "https://docs.google.com/spreadsheets/d/1dyLUo0DS9bVdmJ62zU1Qid8meOJzWOLNazZ2BkWDGSI/edit?gid=0#gid=0"
         }
+      ],
+      "metrics": [
+        {
+          "value": "37",
+          "label": "Bugs reported"
+        },
+        {
+          "value": "17",
+          "label": "Resolved"
+        }
       ]
     },
     {
       "title": "Space Express Web Application",
       "category": "Manual",
-      "featured": false,
       "image": "uploads/spacex.png",
       "description": "End-to-end manual testing of core functional workflows. Analyzed business requirement documents and built a structured feature list to support requirement tracking and test planning.",
       "tags": [
@@ -371,12 +418,21 @@
           "icon": "file",
           "url": "https://docs.google.com/spreadsheets/d/1wsWeIyDIkOx9sQ7PiI66m1VnBsYGa44di4nzL_WM6kI/edit?gid=0#gid=0"
         }
+      ],
+      "metrics": [
+        {
+          "value": "29",
+          "label": "Bugs reported"
+        },
+        {
+          "value": "8",
+          "label": "High severity"
+        }
       ]
     },
     {
       "title": "Quran Mobile App",
       "category": "Manual",
-      "featured": false,
       "image": "uploads/quran.png",
       "description": "End-to-end functional testing of a mobile/web app: validated core features, reported defects with clear reproduction steps and tracked them through requirement-based test execution.",
       "tags": [
@@ -389,6 +445,16 @@
           "label": "Bug Report",
           "icon": "sheet",
           "url": "https://docs.google.com/spreadsheets/d/1CmqtBxq9iosd98xxxrkGMdd2nHyhhDl_OektOp4VIL0/edit?gid=0#gid=0"
+        }
+      ],
+      "metrics": [
+        {
+          "value": "41",
+          "label": "Bugs reported"
+        },
+        {
+          "value": "34",
+          "label": "Resolved"
         }
       ]
     }
@@ -407,6 +473,38 @@
       "authors": "Tahsin Ahmmed, MSI Rimon, WH Zaman, P Roy, MA Razzaque, A Alelaiwi, et al.",
       "venue": "Future Generation Computer Systems (submitted) · Available at SSRN",
       "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5419157"
+    }
+  ],
+  "process": [
+    {
+      "icon": "book",
+      "title": "Requirement analysis",
+      "description": "Break BRDs and specs down into testable requirements and clear acceptance criteria."
+    },
+    {
+      "icon": "file",
+      "title": "Test planning",
+      "description": "Define scope, risks and environments, and the right mix of manual and automated coverage."
+    },
+    {
+      "icon": "sheet",
+      "title": "Test design",
+      "description": "Write structured test cases: functional, negative, edge and cross-platform scenarios."
+    },
+    {
+      "icon": "bot",
+      "title": "Automation",
+      "description": "Build maintainable Playwright and Selenium suites with Page Object Model, plus API checks in Postman."
+    },
+    {
+      "icon": "activity",
+      "title": "Execution & load",
+      "description": "Run smoke, regression and exploratory sessions, and load-test critical APIs with JMeter."
+    },
+    {
+      "icon": "bug",
+      "title": "Defect reporting",
+      "description": "Log clear, reproducible bugs in Linear or Jira and verify every fix through to closure."
     }
   ],
   "education": [

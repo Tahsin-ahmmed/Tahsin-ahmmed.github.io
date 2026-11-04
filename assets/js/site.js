@@ -28,7 +28,16 @@
   function list(a) { return Array.isArray(a) ? a : []; }
   function filled(a) { return list(a).filter(function (x) { return x && (typeof x === 'string' ? x.trim() : true); }); }
 
-  var SECTION_ORDER = ['about', 'experience', 'skills', 'projects', 'publications', 'education', 'leadership', 'references', 'contact'];
+  var SECTION_ORDER = ['about', 'projects', 'experience', 'publications', 'process', 'skills', 'education', 'leadership', 'references', 'contact'];
+  var NAV_SKIP = ['leadership', 'references']; // reachable by scrolling; keeps the top bar short
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* number "1.5+", "<5 min", "82.9%" -> animated count-up */
+  function countMarkup(value) {
+    var m = String(value || '').match(/^(\D*?)(\d+(?:\.\d+)?)(.*)$/);
+    if (!m) return esc(value);
+    return esc(m[1]) + '<span class="count-up" data-to="' + m[2] + '">' + esc(m[2]) + '</span>' + esc(m[3]);
+  }
 
   function head(num, label, title) {
     return '<div class="sec-head reveal"><span class="sec-num">' + num + ' / ' + esc(label) + '</span><h2>' + esc(title) + '</h2></div>';
@@ -44,6 +53,11 @@
     html += '<p class="greet mono">' + esc(h.greeting || '') + '</p>';
     html += '<h1 class="hero-name">' + name + '</h1>';
     html += '<p class="hero-role">' + esc(h.role) + '</p>';
+    var focus = filled(h.focusAreas);
+    if (focus.length) {
+      html += '<p class="hero-focus mono"><span class="sr-only">' + esc((h.focusPrefix || '') + ' ' + focus.join(', ')) + '</span>' +
+        '<span aria-hidden="true"><span class="fp">' + esc(h.focusPrefix || '') + '</span> <span class="rotator" data-words="' + esc(JSON.stringify(focus)) + '">' + esc(focus[0]) + '</span><span class="caret"></span></span></p>';
+    }
     html += '<p class="hero-summary">' + esc(h.summary) + '</p>';
     html += '<div class="hero-cta">';
     html += '<a class="btn primary" href="#projects">View my work ' + icon('arrowRight') + '</a>';
@@ -56,10 +70,10 @@
     }
     $('#heroText').innerHTML = html;
 
-    var v = '<div class="photo-frame">';
+    var v = '<div class="inspect"><span class="inspect-tag mono">locator(\'#' + esc(String(h.firstName || 'me').toLowerCase()) + '\') <b>' + icon('check') + 'visible</b></span><i class="hd tl"></i><i class="hd tr"></i><i class="hd bl"></i><i class="hd br"></i><div class="photo-frame">';
     if (h.profileImage) v += '<img src="' + esc(src(h.profileImage)) + '" alt="Photo of ' + esc((h.firstName || '') + ' ' + (h.lastName || '')) + '" width="420" height="420" fetchpriority="high" />';
     else v += '<div class="photo-ph">' + icon('user') + '</div>';
-    v += '</div>';
+    v += '</div><span class="scanline" aria-hidden="true"></span></div>';
     var lines = filled(h.terminalLines);
     if (lines.length) {
       v += '<div class="terminal" aria-hidden="true"><div class="term-bar"><i></i><i></i><i></i><span>' + esc(h.terminalTitle || 'tests') + '</span></div><pre>';
@@ -71,6 +85,24 @@
     }
     if (h.location) v += '<p class="hero-loc">' + icon('pin') + esc(h.location) + '</p>';
     $('#heroVisual').innerHTML = v;
+
+    /* QA snapshot strip: key numbers + toolchain */
+    var stats = filled((d.about || {}).stats), tools = filled(h.tools);
+    var s = '';
+    if (stats.length || tools.length) {
+      s += '<div class="snap-head mono"><span>' + icon('activity') + 'qa-snapshot</span><span class="pass">' + icon('check') + 'all checks passed</span></div>';
+      if (stats.length) {
+        s += '<div class="snap-grid">' + stats.map(function (st) {
+          return '<div class="snap-cell"><b>' + countMarkup(st.value) + '</b><span>' + esc(st.label) + '</span></div>';
+        }).join('') + '</div>';
+      }
+      if (tools.length) {
+        s += '<div class="snap-tools mono"><span class="muted">stack:</span>' + tools.map(function (t) { return '<span class="tool">' + esc(t) + '</span>'; }).join('') + '</div>';
+      }
+    }
+    var snap = $('#snapshot');
+    snap.innerHTML = s;
+    snap.hidden = !s;
   }
 
   /* ---------- sections ---------- */
@@ -78,18 +110,21 @@
 
   R.about = function (d, n) {
     var a = d.about || {};
-    var stats = filled(a.stats);
+    var focus = filled((d.hero || {}).focusAreas);
     var langs = filled(a.languages);
     var html = '<div class="wrap">' + head(n, 'About', a.heading || 'About me');
-    html += '<div class="about-grid"><div class="prose reveal">' + filled(a.paragraphs).map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
-    if (langs.length) {
-      html += '<div class="langs">' + icon('languages') + langs.map(function (l) { return '<span><b>' + esc(l.name) + '</b> ' + esc(l.level) + '</span>'; }).join('') + '</div>';
-    }
-    html += '</div>';
-    if (stats.length) {
-      html += '<div class="stats reveal">' + stats.map(function (s) {
-        return '<div class="stat"><b>' + esc(s.value) + '</b><span>' + esc(s.label) + '</span></div>';
-      }).join('') + '</div>';
+    html += '<div class="about-grid"><div class="prose reveal">' + filled(a.paragraphs).map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</div>';
+    if (focus.length || langs.length) {
+      html += '<aside class="card focus-card reveal">';
+      if (focus.length) {
+        html += '<p class="focus-title mono">what I test</p><ul class="checklist">' + focus.map(function (f, i) {
+          return '<li style="--i:' + i + '"><span class="tick">' + icon('check') + '</span>' + esc(f.charAt(0).toUpperCase() + f.slice(1)) + '</li>';
+        }).join('') + '</ul>';
+      }
+      if (langs.length) {
+        html += '<div class="langs">' + icon('languages') + langs.map(function (l) { return '<span><b>' + esc(l.name) + '</b> ' + esc(l.level) + '</span>'; }).join('') + '</div>';
+      }
+      html += '</aside>';
     }
     return html + '</div></div>';
   };
@@ -110,7 +145,7 @@
 
   R.skills = function (d, n) {
     var groups = filled(d.skills);
-    var html = '<div class="wrap">' + head(n, 'Skills', 'Toolbox') + '<div class="skills-grid">';
+    var html = '<div class="wrap">' + head(n, 'Skills', 'Test stack') + '<div class="skills-grid">';
     html += groups.map(function (g) {
       return '<div class="card skill-card reveal"><div class="skill-head"><span class="ic-box">' + icon(g.icon || 'check') + '</span><h3>' + esc(g.title) + '</h3></div>' +
         '<ul class="chips">' + filled(g.items).map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ul></div>';
@@ -122,20 +157,23 @@
     var items = filled(d.projects);
     var cats = [];
     items.forEach(function (p) { if (p.category && cats.indexOf(p.category) < 0) cats.push(p.category); });
-    var html = '<div class="wrap">' + head(n, 'Projects', 'Selected test work');
+    var html = '<div class="wrap">' + head(n, 'Projects', 'Proof of work');
     if (cats.length > 1) {
       html += '<div class="filters reveal" role="tablist" aria-label="Filter projects"><button class="chip-btn active" data-filter="*" role="tab" aria-selected="true">All</button>' +
         cats.map(function (c) { return '<button class="chip-btn" data-filter="' + esc(c) + '" role="tab" aria-selected="false">' + esc(c) + '</button>'; }).join('') + '</div>';
     }
     html += '<div class="projects-grid">';
-    html += items.map(function (p) {
+    html += items.map(function (p, i) {
       var links = filled(p.links).filter(function (l) { return l.url; });
+      var metrics = filled(p.metrics).filter(function (m) { return m.value; });
+      var id = 'PRJ-' + (i < 9 ? '0' : '') + (i + 1);
       var media = p.image
         ? '<img src="' + esc(src(p.image)) + '" alt="" loading="lazy" />'
         : '<div class="proj-ph">' + icon(p.category === 'API' ? 'database' : p.category === 'Performance' ? 'activity' : p.category === 'Manual' ? 'bug' : 'terminal') + '<span>' + esc(p.category || 'Project') + '</span></div>';
-      return '<article class="card proj reveal' + (p.featured ? ' featured' : '') + '" data-cat="' + esc(p.category || '') + '">' +
+      return '<article class="card proj reveal" data-cat="' + esc(p.category || '') + '">' +
         '<div class="proj-media">' + media + (p.category ? '<span class="proj-cat">' + esc(p.category) + '</span>' : '') + '</div>' +
-        '<div class="proj-body"><h3>' + esc(p.title) + '</h3><p>' + esc(p.description) + '</p>' +
+        '<div class="proj-body"><p class="proj-id mono">' + id + '<span class="ok">' + icon('check') + 'verified</span></p><h3>' + esc(p.title) + '</h3><p>' + esc(p.description) + '</p>' +
+        (metrics.length ? '<div class="proj-metrics">' + metrics.map(function (m) { return '<div><b>' + countMarkup(m.value) + '</b><span>' + esc(m.label) + '</span></div>'; }).join('') + '</div>' : '') +
         (filled(p.tags).length ? '<div class="tags">' + filled(p.tags).map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
         (links.length ? '<div class="proj-links">' + links.map(function (l) { return '<a ' + linkAttrs(l.url) + '>' + icon(l.icon || 'external') + esc(l.label) + '</a>'; }).join('') + '</div>' : '') +
         '</div></article>';
@@ -152,6 +190,16 @@
         (p.url ? '<a class="text-link" ' + linkAttrs(p.url) + '>Read paper ' + icon('external') + '</a>' : '') + '</article>';
     }).join('');
     return html + '</div></div>';
+  };
+
+  R.process = function (d, n) {
+    var steps = filled(d.process);
+    var html = '<div class="wrap">' + head(n, 'Process', 'How I test') + '<ol class="pipeline reveal" style="--steps:' + steps.length + '">';
+    html += steps.map(function (s, i) {
+      return '<li class="stage" style="--i:' + i + '"><div class="stage-top"><span class="stage-ic">' + icon(s.icon || 'check') + '</span><span class="stage-n mono">' + (i < 9 ? '0' : '') + (i + 1) + '</span></div>' +
+        '<h3>' + esc(s.title) + '</h3><p>' + esc(s.description) + '</p></li>';
+    }).join('');
+    return html + '</ol></div>';
   };
 
   R.education = function (d, n) {
@@ -239,13 +287,75 @@
       var n = (num < 10 ? '0' : '') + num;
       if (key === 'contact') renderContact(d, n);
       else el.innerHTML = R[key](d, n);
-      nav.push('<a href="#' + key + '">' + esc(el.getAttribute('data-label')) + '</a>');
+      if (NAV_SKIP.indexOf(key) < 0) nav.push('<a href="#' + key + '">' + esc(el.getAttribute('data-label')) + '</a>');
     });
     $('#navLinks').innerHTML = nav.join('');
 
     bindProjects();
     reveal();
     spy();
+    countUps();
+    rotate();
+  }
+
+  /* ---------- dynamic touches ---------- */
+  var countObs = null;
+  function runCount(el) {
+    var to = parseFloat(el.getAttribute('data-to'));
+    var dec = (el.getAttribute('data-to').split('.')[1] || '').length;
+    var start = null, dur = 1200;
+    function step(t) {
+      if (start === null) start = t;
+      var k = Math.min(1, (t - start) / dur);
+      var eased = 1 - Math.pow(1 - k, 3);
+      el.textContent = (to * eased).toFixed(dec);
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  function countUps() {
+    var els = document.querySelectorAll('.count-up:not(.counted)');
+    if (reduceMotion || !('IntersectionObserver' in window)) return;
+    if (!countObs) {
+      countObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          en.target.classList.add('counted');
+          countObs.unobserve(en.target);
+          runCount(en.target);
+        });
+      }, { threshold: 0.6 });
+    }
+    els.forEach(function (e) {
+      e.textContent = (0).toFixed((e.getAttribute('data-to').split('.')[1] || '').length);
+      countObs.observe(e);
+    });
+  }
+
+  var rotTimer = null;
+  function rotate() {
+    clearTimeout(rotTimer);
+    var el = document.querySelector('.rotator');
+    if (!el || reduceMotion) return;
+    var words;
+    try { words = JSON.parse(el.getAttribute('data-words')); } catch (e) { return; }
+    if (!words || words.length < 2) return;
+    var w = 0, c = words[0].length, deleting = false;
+    function tick() {
+      var word = words[w];
+      if (!deleting) {
+        c++;
+        el.textContent = word.slice(0, c);
+        if (c >= word.length) { deleting = true; rotTimer = setTimeout(tick, 1800); return; }
+        rotTimer = setTimeout(tick, 55);
+      } else {
+        c--;
+        el.textContent = word.slice(0, c);
+        if (c <= 0) { deleting = false; w = (w + 1) % words.length; rotTimer = setTimeout(tick, 250); return; }
+        rotTimer = setTimeout(tick, 28);
+      }
+    }
+    rotTimer = setTimeout(tick, 1800);
   }
 
   function bindProjects() {
@@ -327,9 +437,15 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
 
   $('#toTop').innerHTML = icon('arrowUp');
-  window.addEventListener('scroll', function () {
+  var bar = $('#progressBar');
+  function onScroll() {
     $('#nav').classList.toggle('scrolled', window.scrollY > 10);
-  }, { passive: true });
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
 
   /* ---------- contact form ---------- */
   $('#contactForm').addEventListener('submit', function (e) {

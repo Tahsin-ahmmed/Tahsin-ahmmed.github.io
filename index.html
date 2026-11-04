@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/qa.css" />
   <script>
     /* apply saved theme before paint to avoid a flash */
     try { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
@@ -22,6 +23,7 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
   <header class="nav" id="nav">
     <div class="nav-inner wrap">
       <a href="#home" class="brand" id="brand" aria-label="Home"></a>
@@ -43,13 +45,15 @@
         </div>
         <div class="hero-visual" id="heroVisual"></div>
       </div>
+      <div class="wrap"><div class="snapshot" id="snapshot"></div></div>
     </section>
 
     <section class="section" id="about" data-label="About"></section>
-    <section class="section alt" id="experience" data-label="Experience"></section>
-    <section class="section" id="skills" data-label="Skills"></section>
     <section class="section alt" id="projects" data-label="Projects"></section>
-    <section class="section" id="publications" data-label="Research"></section>
+    <section class="section" id="experience" data-label="Experience"></section>
+    <section class="section alt" id="publications" data-label="Research"></section>
+    <section class="section process-sec" id="process" data-label="Process"></section>
+    <section class="section" id="skills" data-label="Skills"></section>
     <section class="section alt" id="education" data-label="Education"></section>
     <section class="section" id="leadership" data-label="Leadership"></section>
     <section class="section alt" id="references" data-label="References"></section>
