@@ -589,7 +589,6 @@
     "email": "tahsinahmmed222@gmail.com",
     "phone": "+88 01744688444",
     "location": "Sector-08, Uttara, Dhaka 1230",
-    "formEndpoint": "https://api.web3forms.com/submit",
-    "formKey": "b34c3ca1-c5b0-4794-9fb2-21332491a510"
+    "formEndpoint": "https://formspree.io/f/xyzkqwea"
   }
 }
