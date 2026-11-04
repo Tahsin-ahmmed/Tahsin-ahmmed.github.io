@@ -4,7 +4,7 @@
 */
 window.ADMIN_CONFIG = {
   owner: 'Tahsin-ahmmed',   // your GitHub username
-  repo: 'New-Portfolio',    // the repository that holds this website
+  repo: 'Tahsin-ahmmed.github.io', // the repository that holds this website
   branch: 'main',           // branch your host deploys from
   contentPath: 'data/content.json',
   uploadDir: 'uploads'

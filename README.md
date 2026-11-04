@@ -29,7 +29,7 @@ git init
 git add .
 git commit -m "Portfolio site with admin"
 git branch -M main
-git remote add origin https://github.com/Tahsin-ahmmed/portfolio.git
+git remote add origin https://github.com/Tahsin-ahmmed/Tahsin-ahmmed.github.io.git
 git push -u origin main
 ```
 
@@ -40,7 +40,7 @@ If you pick a different repo name, update `repo:` in `admin/config.js`.
 ### Option A: GitHub Pages (simplest, no extra account)
 1. Repo → **Settings → Pages**.
 2. Source: **Deploy from a branch** → Branch `main`, folder `/ (root)` → Save.
-3. After about a minute your site is live at `https://tahsin-ahmmed.github.io/portfolio/`.
+3. After about a minute your site is live at `https://tahsin-ahmmed.github.io/`.
    - Tip: name the repo `Tahsin-ahmmed.github.io` to get the shorter `https://tahsin-ahmmed.github.io/`. Update `admin/config.js` to match.
 
 ### Option B: Netlify (keep `tahsinahmmed.netlify.app`)
