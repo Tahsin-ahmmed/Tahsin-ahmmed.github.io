@@ -83,7 +83,11 @@
               <label for="cf-msg">Message</label>
               <textarea id="cf-msg" name="message" rows="5" required></textarea>
             </div>
+            <!-- spam traps (left empty by real visitors) and email options -->
             <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <input type="hidden" name="_subject" value="New message from your portfolio" />
+            <input type="hidden" name="_template" value="table" />
             <button class="btn primary" type="submit" id="cfSubmit">Send message</button>
             <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
           </form>

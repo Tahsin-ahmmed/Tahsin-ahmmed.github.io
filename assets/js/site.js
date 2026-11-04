@@ -477,8 +477,19 @@
       headers: { 'Accept': 'application/json' },
       body: new FormData(f)
     }).then(function (r) {
-      if (!r.ok) throw new Error('bad status');
-      f.reset(); st.textContent = 'Thanks! Your message was sent. I will reply soon.'; st.className = 'form-status ok';
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        /* Formspree signals failure with the HTTP status; FormSubmit with success: "false" */
+        var failed = !r.ok || j.success === false || j.success === 'false';
+        if (failed) {
+          if (j.message && /activat/i.test(j.message)) {
+            st.textContent = 'Almost ready: this form must be activated once. Check the inbox of ' + (c.email || 'the site owner') + ' for the activation email.';
+            st.className = 'form-status err';
+            return;
+          }
+          throw new Error(j.message || 'bad status');
+        }
+        f.reset(); st.textContent = 'Thanks! Your message was sent. I will reply soon.'; st.className = 'form-status ok';
+      });
     }).catch(function () {
       st.innerHTML = 'Could not send right now. Please email me at <a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>.'; st.className = 'form-status err';
     }).then(function () { btn.disabled = false; });
