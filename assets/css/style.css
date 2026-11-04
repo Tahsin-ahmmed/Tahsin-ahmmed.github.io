@@ -98,6 +98,8 @@ p { margin: 0; }
   .nav-links { position: fixed; inset: var(--nav-h) 0 0 0; flex-direction: column; gap: 4px; padding: 20px; background: var(--bg); opacity: 0; transform: translateY(-8px); visibility: hidden; transition: opacity .2s ease, transform .2s ease, visibility .2s; overflow-y: auto; margin: 0; }
   .nav-links a { font: 600 22px var(--display); padding: 14px 12px; border-bottom: 1px solid var(--line); border-radius: 0; }
   body.menu-open { overflow: hidden; }
+  /* backdrop-filter traps fixed children inside the header box, so drop it while the menu is open */
+  body.menu-open .nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg); border-bottom-color: var(--line); }
   body.menu-open .nav-links { opacity: 1; transform: none; visibility: visible; }
 }
 
