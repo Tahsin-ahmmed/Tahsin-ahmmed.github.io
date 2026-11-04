@@ -471,11 +471,21 @@
       window.location.href = 'mailto:' + (c.email || '') + '?subject=' + encodeURIComponent('Portfolio message from ' + name) + '&body=' + encodeURIComponent(msg + '\n\n— ' + name + ' (' + email + ')');
       return;
     }
+    if (f.website.value) { f.reset(); st.textContent = 'Thanks! Your message was sent.'; st.className = 'form-status ok'; return; } /* bot */
+    var fd = new FormData();
+    fd.append('name', name); fd.append('email', email); fd.append('message', msg);
+    if (c.formKey) { /* Web3Forms */
+      fd.append('access_key', c.formKey);
+      fd.append('subject', 'New portfolio message from ' + name);
+      fd.append('from_name', 'Portfolio contact form');
+    } else { /* Formspree / FormSubmit */
+      fd.append('_subject', 'New portfolio message from ' + name);
+    }
     btn.disabled = true; st.textContent = 'Sending…'; st.className = 'form-status';
     fetch(c.formEndpoint, {
       method: 'POST',
       headers: { 'Accept': 'application/json' },
-      body: new FormData(f)
+      body: fd
     }).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (j) {
         /* Formspree signals failure with the HTTP status; FormSubmit with success: "false" */
