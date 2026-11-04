@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tahsin Ahmmed | SQA Engineer</title>
+  <meta name="description" content="Portfolio of Tahsin Ahmmed, Software Quality Assurance Engineer experienced in manual, automation, API and performance testing." />
+  <meta property="og:title" content="Tahsin Ahmmed | SQA Engineer" />
+  <meta property="og:description" content="Software Quality Assurance Engineer: manual, automation, API and performance testing." />
+  <meta property="og:image" content="uploads/profile.jpg" />
+  <meta name="theme-color" content="#0d1014" />
+  <link rel="icon" id="favicon" href="uploads/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script>
+    /* apply saved theme before paint to avoid a flash */
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" id="nav">
+    <div class="nav-inner wrap">
+      <a href="#home" class="brand" id="brand" aria-label="Home"></a>
+      <nav class="nav-links" id="navLinks" aria-label="Main"></nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode"></button>
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div class="hero-text" id="heroText">
+          <div class="skeleton" style="height:2rem;width:40%"></div>
+          <div class="skeleton" style="height:4rem;width:80%;margin-top:1rem"></div>
+          <div class="skeleton" style="height:6rem;width:100%;margin-top:1rem"></div>
+        </div>
+        <div class="hero-visual" id="heroVisual"></div>
+      </div>
+    </section>
+
+    <section class="section" id="about" data-label="About"></section>
+    <section class="section alt" id="experience" data-label="Experience"></section>
+    <section class="section" id="skills" data-label="Skills"></section>
+    <section class="section alt" id="projects" data-label="Projects"></section>
+    <section class="section" id="publications" data-label="Research"></section>
+    <section class="section alt" id="education" data-label="Education"></section>
+    <section class="section" id="leadership" data-label="Leadership"></section>
+    <section class="section alt" id="references" data-label="References"></section>
+
+    <section class="section contact" id="contact" data-label="Contact">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="sec-num" id="contactNum">// contact</span>
+          <h2 id="contactHeading">Get in touch</h2>
+        </div>
+        <div class="contact-grid">
+          <div>
+            <p class="lead" id="contactDesc"></p>
+            <ul class="contact-list" id="contactList"></ul>
+            <div class="socials" id="contactSocials"></div>
+          </div>
+          <form class="card form" id="contactForm" novalidate>
+            <div class="field">
+              <label for="cf-name">Name</label>
+              <input id="cf-name" name="name" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" name="email" type="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="cf-msg">Message</label>
+              <textarea id="cf-msg" name="message" rows="5" required></textarea>
+            </div>
+            <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <button class="btn primary" type="submit" id="cfSubmit">Send message</button>
+            <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p id="footerText"></p>
+      <a href="#home" class="icon-btn" aria-label="Back to top" id="toTop"></a>
+    </div>
+  </footer>
+
+  <noscript><p style="padding:2rem;text-align:center">Please enable JavaScript to view this portfolio.</p></noscript>
+
+  <script src="assets/js/icons.js"></script>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

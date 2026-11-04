@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Portfolio Admin</title>
+  <link rel="icon" href="../uploads/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <!-- Login -->
+  <main class="login" id="loginView" hidden>
+    <form class="login-card" id="loginForm">
+      <div class="login-brand"><span class="logo">TA</span><div><h1>Portfolio Admin</h1><p>Edits are saved to your GitHub repo and go live automatically.</p></div></div>
+      <label class="fld"><span>GitHub repository</span>
+        <input id="lgRepo" placeholder="username/repository" required autocomplete="off" spellcheck="false" />
+      </label>
+      <label class="fld"><span>Branch</span>
+        <input id="lgBranch" placeholder="main" required autocomplete="off" spellcheck="false" />
+      </label>
+      <label class="fld"><span>GitHub access token</span>
+        <input id="lgToken" type="password" placeholder="github_pat_…" required autocomplete="current-password" spellcheck="false" />
+      </label>
+      <label class="check"><input type="checkbox" id="lgRemember" checked /> Remember me on this device</label>
+      <button class="btn primary block" type="submit" id="lgBtn">Sign in</button>
+      <p class="err" id="lgErr" role="alert"></p>
+      <details class="help">
+        <summary>How do I get a token?</summary>
+        <ol>
+          <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained tokens → Generate new token</a>.</li>
+          <li>Repository access: <b>Only select repositories</b> → pick your portfolio repo.</li>
+          <li>Permissions → Repository → <b>Contents: Read and write</b>.</li>
+          <li>Generate, copy the token and paste it above. It stays in this browser only.</li>
+        </ol>
+      </details>
+    </form>
+  </main>
+
+  <!-- Editor -->
+  <div class="app" id="appView" hidden>
+    <header class="topbar">
+      <div class="tb-left">
+        <span class="logo sm">TA</span>
+        <div class="tb-title"><b>Portfolio Admin</b><small id="repoLabel"></small></div>
+      </div>
+      <div class="tb-right">
+        <span class="state" id="stateLabel">All changes published</span>
+        <button class="btn ghost" id="previewBtn" title="Toggle live preview"><span data-ic="play"></span><span class="lbl">Preview</span></button>
+        <a class="btn ghost hide-sm" href="../" target="_blank" rel="noopener"><span data-ic="external"></span><span class="lbl">View site</span></a>
+        <div class="menu-wrap">
+          <button class="btn ghost icon-only" id="moreBtn" aria-haspopup="true" aria-expanded="false" title="More"><span data-ic="menu"></span></button>
+          <div class="menu" id="moreMenu" hidden>
+            <a href="../" target="_blank" rel="noopener" class="show-sm">View live site</a>
+            <button id="backupBtn">Download backup (JSON)</button>
+            <button id="importBtn">Import JSON…</button>
+            <button id="reloadBtn">Discard changes &amp; reload</button>
+            <button id="logoutBtn" class="danger">Sign out</button>
+          </div>
+        </div>
+        <button class="btn primary" id="publishBtn" disabled><span data-ic="send"></span><span class="lbl">Publish</span></button>
+      </div>
+    </header>
+    <div class="layout" id="layout">
+      <nav class="tabs" id="tabs" aria-label="Sections"></nav>
+      <section class="editor" id="editor" aria-live="polite"></section>
+      <aside class="preview" id="preview" hidden>
+        <div class="pv-bar">
+          <div class="seg">
+            <button data-w="desktop" class="on">Desktop</button>
+            <button data-w="mobile">Mobile</button>
+          </div>
+          <button class="btn ghost icon-only" id="pvClose" title="Close preview"><span data-ic="x"></span></button>
+        </div>
+        <div class="pv-stage"><iframe id="pvFrame" title="Live preview"></iframe></div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <input type="file" id="importFile" accept="application/json,.json" hidden />
+
+  <script src="../assets/js/icons.js"></script>
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

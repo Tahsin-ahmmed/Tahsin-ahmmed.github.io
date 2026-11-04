@@ -1,0 +1,308 @@
+{
+  "site": {
+    "title": "Tahsin Ahmmed | SQA Engineer",
+    "description": "Portfolio of Tahsin Ahmmed, Software Quality Assurance Engineer experienced in manual, automation, API and performance testing.",
+    "logoText": "Tahsin Ahmmed",
+    "logoImage": "",
+    "favicon": "uploads/favicon.svg",
+    "footerText": "Designed, built and tested by Tahsin Ahmmed.",
+    "sections": {
+      "about": true,
+      "experience": true,
+      "skills": true,
+      "projects": true,
+      "publications": true,
+      "education": true,
+      "leadership": true,
+      "references": false,
+      "contact": true
+    }
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "firstName": "Tahsin",
+    "lastName": "Ahmmed",
+    "role": "Software Quality Assurance Engineer",
+    "summary": "Detail-oriented SQA Engineer experienced in manual and automation testing of web applications. I design and execute test cases, build automation suites with Python and Playwright, and turn defects into clear, actionable bug reports.",
+    "profileImage": "uploads/profile.jpg",
+    "status": "Open to QA opportunities",
+    "showStatus": true,
+    "location": "Uttara, Dhaka, Bangladesh",
+    "cvFile": "uploads/Tahsin_Ahmmed_CV.pdf",
+    "cvLabel": "Download CV",
+    "terminalTitle": "optimalmd-e2e",
+    "terminalLines": []
+  },
+  "socials": [
+    { "label": "GitHub", "icon": "github", "url": "https://github.com/Tahsin-ahmmed" },
+    { "label": "LinkedIn", "icon": "linkedin", "url": "https://www.linkedin.com/in/taahsin-ahmmed/" },
+    { "label": "Email", "icon": "mail", "url": "mailto:tahsinahmmed222@gmail.com" },
+    { "label": "WhatsApp", "icon": "whatsapp", "url": "https://wa.me/8801744688444" },
+    { "label": "Facebook", "icon": "facebook", "url": "https://www.facebook.com/t.ahmmed222/" }
+  ],
+  "about": {
+    "heading": "Quality is a habit, not a phase",
+    "paragraphs": [
+      "I'm a Junior SQA Engineer at Octopi-Digital Limited, where I test OptimalMD and several in-house products. My work spans functional, regression and exploratory testing, plus Playwright automation for the OptimalMD staging platform.",
+      "Before that I tested web and mobile apps at Join Venture AI and QA Harbor, covering API testing with Postman, performance testing with JMeter and Selenium automation inside Agile teams.",
+      "I graduated in Computer Science and Engineering from Green University of Bangladesh with a 3.84 CGPA, and have co-authored research on carbon-neutral edge computing published at IEEE SMC 2025."
+    ],
+    "stats": [
+      { "value": "1.5+", "label": "Years in QA" },
+      { "value": "8+", "label": "QA projects" },
+      { "value": "3.84", "label": "CGPA" },
+      { "value": "2", "label": "Publications" }
+    ],
+    "languages": [
+      { "name": "English", "level": "Proficient" },
+      { "name": "Bengali", "level": "Native" }
+    ]
+  },
+  "experience": [
+    {
+      "company": "Octopi-Digital Limited",
+      "role": "Junior SQA Engineer",
+      "period": "July 2026 – Present",
+      "location": "Dhaka, Bangladesh",
+      "current": true,
+      "bullets": [
+        "Perform manual testing across OptimalMD and multiple in-house projects, covering functional, regression and exploratory testing to ensure application quality and usability.",
+        "Design, develop and execute automated test scripts for the OptimalMD staging platform using Python and Playwright.",
+        "Identify, document and track defects in Linear, writing detailed bug reports and working with developers through to resolution."
+      ],
+      "tags": ["Playwright", "Python", "pytest", "Linear", "Regression", "Exploratory"]
+    },
+    {
+      "company": "Join Venture AI",
+      "role": "Jr. SQA Engineer",
+      "period": "July 2025 – June 2026",
+      "location": "Dhaka, Bangladesh",
+      "current": false,
+      "bullets": [
+        "Performed manual and automation testing of web and mobile applications using Playwright, designing and executing functional, regression and cross-platform test cases.",
+        "Conducted API testing with Postman and performance testing with Apache JMeter to evaluate functionality, reliability and performance.",
+        "Analyzed business requirements and technical specifications to prepare test documentation, and collaborated with developers and cross-functional teams in Agile sprints."
+      ],
+      "tags": ["Playwright", "Postman", "JMeter", "Jira", "Agile"]
+    },
+    {
+      "company": "QA Harbor Limited",
+      "role": "SQA Intern",
+      "period": "March 2025 – June 2025",
+      "location": "Dhaka, Bangladesh",
+      "current": false,
+      "bullets": [
+        "Supported manual testing of web and mobile applications by designing and executing test scenarios.",
+        "Assisted in Selenium automation setup and participated in security testing activities.",
+        "Collaborated within Agile teams using SDLC and STLC practices to identify defects and improve application quality."
+      ],
+      "tags": ["Selenium", "Manual Testing", "Security Testing", "SDLC/STLC"]
+    }
+  ],
+  "skills": [
+    {
+      "title": "Testing",
+      "icon": "shield",
+      "items": ["Manual", "Automation", "Functional", "Regression", "Smoke", "Exploratory", "Usability", "API", "Load", "Stress", "Database"]
+    },
+    {
+      "title": "Automation & Tools",
+      "icon": "bot",
+      "items": ["Playwright", "Selenium WebDriver", "pytest", "Postman", "Newman", "Apache JMeter"]
+    },
+    {
+      "title": "Tracking & Process",
+      "icon": "bug",
+      "items": ["Linear", "Jira", "Agile", "Scrum", "SDLC", "STLC", "CI/CD (basic)"]
+    },
+    {
+      "title": "Languages & Data",
+      "icon": "code",
+      "items": ["Python", "Java", "C/C++", "SQL", "MySQL"]
+    },
+    {
+      "title": "Dev Tools & OS",
+      "icon": "wrench",
+      "items": ["Git", "GitHub", "VS Code", "IntelliJ IDEA", "Linux (Ubuntu)", "Windows", "macOS"]
+    },
+    {
+      "title": "Soft Skills",
+      "icon": "users",
+      "items": ["Problem-Solving", "Communication", "Team Collaboration", "Critical Thinking", "Leadership", "Time Management"]
+    }
+  ],
+  "projects": [
+    {
+      "title": "OptimalMD Member Portal – Test Automation Suite",
+      "category": "Automation",
+      "featured": true,
+      "image": "",
+      "description": "Playwright + pytest suite (Page Object Model) for a healthcare portal covering registration, Stripe payments, email/OTP verification over IMAP, profile activation, dashboard services and dependents. Runs 30+ tests in under 5 minutes, with a custom Flask runner that shows a live browser view and step-by-step results.",
+      "tags": ["Playwright", "pytest", "Python", "POM", "Stripe", "IMAP", "Flask"],
+      "links": [
+        { "label": "GitHub", "icon": "github", "url": "" },
+        { "label": "Demo Video", "icon": "video", "url": "" }
+      ]
+    },
+    {
+      "title": "Advantage Shopping Test Suite",
+      "category": "Automation",
+      "featured": false,
+      "image": "uploads/advantageShopping.png",
+      "description": "Manual and automated testing of the Advantage Shopping web app using Playwright with Python. Designed and executed test cases to validate functionality, find bugs and check cross-browser compatibility.",
+      "tags": ["Playwright", "Python", "Page Object Model", "Cross-Browser"],
+      "links": [
+        { "label": "GitHub", "icon": "github", "url": "https://github.com/Tahsin-ahmmed/Advantage-Shopping-Autamation-Testing" },
+        { "label": "Bug Report", "icon": "sheet", "url": "" }
+      ]
+    },
+    {
+      "title": "Restful-booker API (API Testing)",
+      "category": "API",
+      "featured": false,
+      "image": "uploads/restfulBooker.png",
+      "description": "Automated authentication and booking CRUD workflows in Postman with dynamic variables, pre/post scripts and response assertions. Ran collections with Newman to generate HTML test reports.",
+      "tags": ["Postman", "Newman", "JavaScript", "REST API"],
+      "links": [
+        { "label": "GitHub", "icon": "github", "url": "https://github.com/Tahsin-ahmmed/Restful-booker-API-Testing" }
+      ]
+    },
+    {
+      "title": "Restful-booker API (Performance Testing)",
+      "category": "Performance",
+      "featured": false,
+      "image": "uploads/restfulBookerJmeter.png",
+      "description": "Load test scenarios in Apache JMeter with assertions and pre/post-processors for dynamic data. Executed via CLI and generated HTML reports to analyze response time, throughput and system performance.",
+      "tags": ["JMeter", "Load Testing", "Stress Testing", "CLI"],
+      "links": [
+        { "label": "GitHub", "icon": "github", "url": "https://github.com/Tahsin-ahmmed/Restful-booker-Performance-Testing" }
+      ]
+    },
+    {
+      "title": "LuxuryOps Web Application",
+      "category": "Manual",
+      "featured": false,
+      "image": "uploads/luxuryOps.png",
+      "description": "End-to-end manual testing focused on UI/UX and usability. Documented bugs in a structured report highlighting user experience inconsistencies.",
+      "tags": ["Manual Testing", "UI/UX", "Usability", "Bug Reporting"],
+      "links": [
+        { "label": "Bug Report", "icon": "sheet", "url": "https://docs.google.com/spreadsheets/d/1dyLUo0DS9bVdmJ62zU1Qid8meOJzWOLNazZ2BkWDGSI/edit?gid=0#gid=0" }
+      ]
+    },
+    {
+      "title": "Space Express Web Application",
+      "category": "Manual",
+      "featured": false,
+      "image": "uploads/spacex.png",
+      "description": "End-to-end manual testing of core functional workflows. Analyzed business requirement documents and built a structured feature list to support requirement tracking and test planning.",
+      "tags": ["Functional Testing", "Requirement Analysis", "Test Planning"],
+      "links": [
+        { "label": "Bug Report", "icon": "sheet", "url": "https://docs.google.com/spreadsheets/d/1fZrJIhmDxsR4yothkNRI9Zbp3Z4v3yd1waQ7w07ACM0/edit?gid=0#gid=0" },
+        { "label": "Feature List", "icon": "file", "url": "https://docs.google.com/spreadsheets/d/1wsWeIyDIkOx9sQ7PiI66m1VnBsYGa44di4nzL_WM6kI/edit?gid=0#gid=0" }
+      ]
+    },
+    {
+      "title": "Quran Mobile App",
+      "category": "Manual",
+      "featured": false,
+      "image": "uploads/quran.png",
+      "description": "End-to-end functional testing of a mobile/web app: validated core features, reported defects with clear reproduction steps and tracked them through requirement-based test execution.",
+      "tags": ["Mobile Testing", "Functional Testing", "Defect Tracking"],
+      "links": [
+        { "label": "Bug Report", "icon": "sheet", "url": "https://docs.google.com/spreadsheets/d/1CmqtBxq9iosd98xxxrkGMdd2nHyhhDl_OektOp4VIL0/edit?gid=0#gid=0" }
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "badge": "IEEE SMC 2025",
+      "title": "Green Energy and Latency Aware Computation Intensive Machine Learning Task Offloading in Carbon-Neutral Edge Computing",
+      "authors": "Tahsin Ahmmed, WH Zaman, MSI Rimon, P Roy, MA Razzaque, G Fortino, et al.",
+      "venue": "2025 IEEE International Conference on Systems, Man, and Cybernetics (SMC)",
+      "url": "https://ieeexplore.ieee.org/document/11342601"
+    },
+    {
+      "badge": "Under Review · FGCS",
+      "title": "A Multi-Head Attention Enhanced MAPPO Algorithm for Machine Learning-Task Offloading in Carbon-Neutral Collaborative Edge Computing",
+      "authors": "Tahsin Ahmmed, MSI Rimon, WH Zaman, P Roy, MA Razzaque, A Alelaiwi, et al.",
+      "venue": "Future Generation Computer Systems (submitted) · Available at SSRN",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5419157"
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Sc. in Computer Science and Engineering",
+      "institute": "Green University of Bangladesh",
+      "period": "2021 – 2025",
+      "result": "CGPA 3.84 / 4.00"
+    },
+    {
+      "degree": "Higher Secondary Certificate (HSC)",
+      "institute": "Moulovi Abdul Hye Memorial School & College",
+      "period": "2019",
+      "result": "GPA 4.87 / 5.00"
+    }
+  ],
+  "achievements": [
+    { "icon": "medal", "title": "VC's Certificate", "description": "Awarded for a GPA of 3.90–4.00 in Spring '23 and Spring '25." },
+    { "icon": "award", "title": "Dean's Certificate", "description": "Awarded for a GPA of 3.80–3.89 in Fall '21, Summer '22, Fall '23, Spring '24 and Fall '24." },
+    { "icon": "trophy", "title": "Best Volunteer Award", "description": "Best Computer Society Student Volunteer in Bangladesh, 2024." }
+  ],
+  "leadership": [
+    {
+      "title": "Chair, IEEE Computer Society Student Branch Chapter",
+      "org": "Green University of Bangladesh",
+      "period": "Mar 2024 – May 2025",
+      "points": [
+        "Organized and led 26+ technical workshops and events on AI, ML and IoT in 2024.",
+        "Helped the chapter win Best Computer Society Student Branch Chapter in Bangladesh."
+      ]
+    },
+    {
+      "title": "Vice Chair (Technical), IEEE Student Branch",
+      "org": "Green University of Bangladesh",
+      "period": "Mar 2024 – May 2025",
+      "points": [
+        "Helped organize and run 20 events with clear coordination and on-time delivery."
+      ]
+    },
+    {
+      "title": "Student Mentor & Mentor Advisor, Dept. of CSE",
+      "org": "Green University of Bangladesh",
+      "period": "Jan 2023 – Jun 2025",
+      "points": [
+        "Mentored 300+ students in a collaborative learning environment.",
+        "Guided new mentors and supported departmental mentorship activities."
+      ]
+    }
+  ],
+  "volunteering": [
+    "Volunteer, 6th International Conference on Sustainable Technologies for Industry 5.0 (STI 2024)",
+    "Lead Volunteer, CSE Carnival 2024",
+    "Volunteer, IEEE inauguration ceremony"
+  ],
+  "references": [
+    {
+      "name": "Prof. Dr. Md. Abdur Razzaque",
+      "title": "Professor and Chairman, Dept. of CSE",
+      "org": "University of Dhaka",
+      "email": "razzaque@du.ac.bd",
+      "phone": ""
+    },
+    {
+      "name": "Mr. Palash Roy",
+      "title": "Lecturer, Dept. of CSE",
+      "org": "University of Dhaka",
+      "email": "palash@du.ac.bd",
+      "phone": ""
+    }
+  ],
+  "contact": {
+    "heading": "Let's ship something reliable",
+    "description": "I'm open to QA roles and collaborations. If you need someone to tighten your testing process and catch issues before your users do, get in touch.",
+    "email": "tahsinahmmed222@gmail.com",
+    "phone": "+88 01744688444",
+    "location": "Sector-08, Uttara, Dhaka 1230",
+    "formEndpoint": "https://formspree.io/f/xyzkqwea"
+  }
+}
