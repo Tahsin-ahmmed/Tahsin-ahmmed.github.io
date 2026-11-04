@@ -42,9 +42,11 @@
     ],
     "tools": [
       "Playwright",
+      "POM",
       "Selenium",
       "pytest",
       "Postman",
+      "Newman",
       "JMeter",
       "Linear",
       "Jira"
