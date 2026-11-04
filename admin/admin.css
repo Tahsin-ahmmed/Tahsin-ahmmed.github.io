@@ -54,6 +54,18 @@ a { color: var(--accent); }
 .help ol { padding-left: 20px; margin: 10px 0 0; }
 .help li + li { margin-top: 6px; }
 
+.linkish { background: none; border: 0; padding: 4px 0; color: var(--accent); font: 600 14px var(--font); cursor: pointer; justify-self: center; }
+.linkish:hover { text-decoration: underline; }
+
+/* dialog */
+.dlg { width: min(440px, calc(100% - 32px)); border: 1px solid var(--line); border-radius: 16px; padding: 24px; background: var(--surface); color: var(--ink); box-shadow: 0 20px 50px rgba(0, 0, 0, .25); }
+.dlg::backdrop { background: rgba(10, 14, 18, .55); }
+.dlg form { display: grid; gap: 14px; }
+.dlg h2 { font-size: 1.3rem; }
+.dlg-sub { margin: -6px 0 0; color: var(--muted); font-size: 14px; }
+.dlg .f-hint { margin: 0; }
+.dlg-actions { display: flex; justify-content: flex-end; gap: 8px; }
+
 /* inputs */
 input[type=text], input[type=url], input[type=password], input:not([type]), textarea, select {
   width: 100%; font: 15px var(--font); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 9px; padding: 10px 12px; min-height: 42px;

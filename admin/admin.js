@@ -14,6 +14,37 @@
   })();
 
   var STORE = 'pf-admin-auth';
+  var AUTH_PATH = 'admin/auth.json'; // encrypted token, unlocked by username + password
+  var authFile = null;               // contents of auth.json, if set up
+
+  /* ---------- username/password lock (PBKDF2 + AES-GCM) ---------- */
+  var enc = new TextEncoder();
+  function bytesToB64(bytes) { var s = ''; for (var i = 0; i < bytes.length; i++) s += String.fromCharCode(bytes[i]); return btoa(s); }
+  function b64ToBytes(b64) { var bin = atob(b64); var a = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); return a; }
+  function deriveKey(user, pass, salt, iter) {
+    return crypto.subtle.importKey('raw', enc.encode(user.trim().toLowerCase() + '\n' + pass), 'PBKDF2', false, ['deriveKey'])
+      .then(function (base) {
+        return crypto.subtle.deriveKey({ name: 'PBKDF2', salt: salt, iterations: iter, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+      });
+  }
+  function sealAuth(payload, user, pass) {
+    var salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12)), iter = 600000;
+    return deriveKey(user, pass, salt, iter)
+      .then(function (key) { return crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv }, key, enc.encode(JSON.stringify(payload))); })
+      .then(function (ct) { return { v: 1, kdf: 'PBKDF2-SHA256', iterations: iter, salt: bytesToB64(salt), iv: bytesToB64(iv), data: bytesToB64(new Uint8Array(ct)) }; });
+  }
+  function openAuth(file, user, pass) {
+    return deriveKey(user, pass, b64ToBytes(file.salt), file.iterations)
+      .then(function (key) { return crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64ToBytes(file.iv) }, key, b64ToBytes(file.data)); })
+      .then(function (pt) { return JSON.parse(new TextDecoder().decode(pt)); },
+            function () { throw new Error('Wrong username or password.'); });
+  }
+  function loadAuthFile() {
+    return fetch('auth.json', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { authFile = j && j.data && j.salt ? j : null; })
+      .catch(function () { authFile = null; });
+  }
   var S = {
     owner: '', repo: '', branch: '', token: '',
     content: null,
@@ -574,14 +605,76 @@
     setDirty(false);
   }
 
-  function showLogin(msg) {
+  function showLogin(msg, mode) {
     $('#appView').hidden = true;
     $('#loginView').hidden = false;
+    var usePw = mode ? mode === 'password' : !!authFile;
+    $('#pwForm').hidden = !usePw;
+    $('#loginForm').hidden = usePw;
+    $('#usePwBtn').hidden = !authFile;
     var saved = loadAuth() || {};
     $('#lgRepo').value = saved.owner ? saved.owner + '/' + saved.repo : (CFG.owner && CFG.repo ? CFG.owner + '/' + CFG.repo : '');
     $('#lgBranch').value = saved.branch || CFG.branch || 'main';
-    $('#lgErr').textContent = msg || '';
+    $('#lgErr').textContent = usePw ? '' : (msg || '');
+    $('#pwErr').textContent = usePw ? (msg || '') : '';
   }
+  $('#useTokenBtn').addEventListener('click', function () { showLogin('', 'token'); });
+  $('#usePwBtn').addEventListener('click', function () { showLogin('', 'password'); });
+
+  /* ---------- username & password sign-in ---------- */
+  $('#pwForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = $('#pwBtn');
+    btn.disabled = true; btn.textContent = 'Signing in…'; $('#pwErr').textContent = '';
+    openAuth(authFile, $('#pwUser').value, $('#pwPass').value)
+      .then(function (p) {
+        return signIn({ owner: p.owner, repo: p.repo, branch: p.branch, token: p.token }, $('#pwRemember').checked).catch(function (err) {
+          if (err.status === 401) throw new Error('Your password is correct, but the GitHub token saved with it has expired. Sign in with a new GitHub token, then set your username and password again from the ☰ menu.');
+          throw err;
+        });
+      })
+      .then(function () { $('#pwPass').value = ''; })
+      .catch(function (err) { $('#pwErr').textContent = err.status ? friendly(err) : err.message; })
+      .then(function () { btn.disabled = false; btn.textContent = 'Sign in'; });
+  });
+
+  /* ---------- choose username & password ---------- */
+  var dlg = $('#setupDlg');
+  function openSetup() {
+    $('#suErr').textContent = '';
+    $('#suPass').value = ''; $('#suPass2').value = '';
+    dlg.showModal();
+  }
+  $('#suSkip').addEventListener('click', function () { dlg.close(); });
+  $('#setPwBtn').addEventListener('click', openSetup);
+  $('#setupForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var user = $('#suUser').value.trim(), p1 = $('#suPass').value, p2 = $('#suPass2').value;
+    if (!user) { $('#suErr').textContent = 'Choose a username.'; return; }
+    if (p1.length < 10) { $('#suErr').textContent = 'Password must be at least 10 characters.'; return; }
+    if (p1 !== p2) { $('#suErr').textContent = 'The passwords do not match.'; return; }
+    var btn = $('#suBtn');
+    btn.disabled = true; btn.textContent = 'Saving…'; $('#suErr').textContent = '';
+    sealAuth({ token: S.token, owner: S.owner, repo: S.repo, branch: S.branch }, user, p1)
+      .then(function (sealed) {
+        var text = JSON.stringify(sealed, null, 2) + '\n';
+        var url = repoPath() + '/contents/' + encPath(AUTH_PATH);
+        return gh(url + '?ref=' + encodeURIComponent(S.branch))
+          .then(function (f) { return f.sha; }, function (err) { if (err.status === 404) return null; throw err; })
+          .then(function (sha) {
+            var body = { message: 'Set admin username and password', content: bytesToB64(enc.encode(text)), branch: S.branch };
+            if (sha) body.sha = sha;
+            return gh(url, { method: 'PUT', body: body });
+          })
+          .then(function () { authFile = sealed; });
+      })
+      .then(function () {
+        dlg.close();
+        toast('Saved! In 1–2 minutes you can sign in with "' + user + '" and your password on any device.', 'ok', 8000);
+      })
+      .catch(function (err) { $('#suErr').textContent = friendly(err); })
+      .then(function () { btn.disabled = false; btn.textContent = 'Save'; });
+  });
 
   /* ================= auth persistence ================= */
   function loadAuth() {
@@ -616,6 +709,7 @@
     var btn = $('#lgBtn');
     btn.disabled = true; btn.textContent = 'Signing in…'; $('#lgErr').textContent = '';
     signIn({ owner: parts[0], repo: parts[1], branch: $('#lgBranch').value.trim() || 'main', token: $('#lgToken').value.trim() }, $('#lgRemember').checked)
+      .then(function () { if (!authFile) openSetup(); })
       .catch(function (err) { $('#lgErr').textContent = friendly(err); })
       .then(function () { btn.disabled = false; btn.textContent = 'Sign in'; });
   });
@@ -686,12 +780,14 @@
 
   /* ================= boot ================= */
   paintIcons();
-  var saved = loadAuth();
-  if (saved && saved.token) {
-    var remembered = false;
-    try { remembered = !!localStorage.getItem(STORE); } catch (e) {}
-    signIn(saved, remembered).catch(function (e) { showLogin(friendly(e)); });
-  } else {
-    showLogin();
-  }
+  loadAuthFile().then(function () {
+    var saved = loadAuth();
+    if (saved && saved.token) {
+      var remembered = false;
+      try { remembered = !!localStorage.getItem(STORE); } catch (e) {}
+      signIn(saved, remembered).catch(function (e) { showLogin(friendly(e)); });
+    } else {
+      showLogin();
+    }
+  });
 })();

@@ -62,7 +62,10 @@ Workers & Pages → Create → Pages → Connect to Git → pick the repo. Frame
 ## 4. Use the admin
 
 1. Go to `https://<your-site>/admin/`.
-2. Paste the token and sign in. Keep **Remember me** ticked only on your own devices.
+2. **First time only:** paste the token and sign in. The admin then asks you to choose a **username and password**.
+3. **From then on, on any device:** sign in with that username and password. You won't need the token again.
+   - How it works: your token is encrypted with your password and saved as `admin/auth.json`. The password itself is never stored, so use a strong one (10+ characters, not reused from another site).
+   - Forgot the password, or the token expired? Click **Sign in with a GitHub token instead**, then choose a new username and password from the ☰ menu (**Username & password…**).
 3. Edit any section. Use **Upload image** for photos (they are resized and converted to WebP automatically) and **Upload file** for your CV PDF.
 4. Click **Preview** to see changes live on desktop or mobile.
 5. Click **Publish**. The live site updates in 1–2 minutes.

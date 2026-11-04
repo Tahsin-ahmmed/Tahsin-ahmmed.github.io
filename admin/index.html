@@ -14,7 +14,23 @@
 <body>
   <!-- Login -->
   <main class="login" id="loginView" hidden>
-    <form class="login-card" id="loginForm">
+    <!-- Username + password (after first-time setup) -->
+    <form class="login-card" id="pwForm" hidden>
+      <div class="login-brand"><span class="logo">TA</span><div><h1>Portfolio Admin</h1><p>Sign in to edit your portfolio.</p></div></div>
+      <label class="fld"><span>Username</span>
+        <input id="pwUser" required autocomplete="username" autocapitalize="off" spellcheck="false" />
+      </label>
+      <label class="fld"><span>Password</span>
+        <input id="pwPass" type="password" required autocomplete="current-password" />
+      </label>
+      <label class="check"><input type="checkbox" id="pwRemember" checked /> Keep me signed in on this device</label>
+      <button class="btn primary block" type="submit" id="pwBtn">Sign in</button>
+      <p class="err" id="pwErr" role="alert"></p>
+      <button type="button" class="linkish" id="useTokenBtn">Sign in with a GitHub token instead</button>
+    </form>
+
+    <!-- GitHub token (first-time setup / recovery) -->
+    <form class="login-card" id="loginForm" hidden>
       <div class="login-brand"><span class="logo">TA</span><div><h1>Portfolio Admin</h1><p>Edits are saved to your GitHub repo and go live automatically.</p></div></div>
       <label class="fld"><span>GitHub repository</span>
         <input id="lgRepo" placeholder="username/repository" required autocomplete="off" spellcheck="false" />
@@ -37,8 +53,32 @@
           <li>Generate, copy the token and paste it above. It stays in this browser only.</li>
         </ol>
       </details>
+      <button type="button" class="linkish" id="usePwBtn" hidden>Sign in with username &amp; password instead</button>
     </form>
   </main>
+
+  <!-- Choose username & password -->
+  <dialog class="dlg" id="setupDlg">
+    <form id="setupForm" method="dialog">
+      <h2>Set your username &amp; password</h2>
+      <p class="dlg-sub">From now on, sign in with these on any device. No token needed.</p>
+      <label class="fld"><span>Username</span>
+        <input id="suUser" required autocomplete="username" autocapitalize="off" spellcheck="false" />
+      </label>
+      <label class="fld"><span>Password</span>
+        <input id="suPass" type="password" required minlength="10" autocomplete="new-password" />
+      </label>
+      <label class="fld"><span>Confirm password</span>
+        <input id="suPass2" type="password" required minlength="10" autocomplete="new-password" />
+      </label>
+      <p class="f-hint">Use at least 10 characters, and don't reuse a password from another site. If you forget it, sign in with a GitHub token and set a new one.</p>
+      <p class="err" id="suErr" role="alert"></p>
+      <div class="dlg-actions">
+        <button type="button" class="btn ghost" id="suSkip">Not now</button>
+        <button type="submit" class="btn primary" id="suBtn">Save</button>
+      </div>
+    </form>
+  </dialog>
 
   <!-- Editor -->
   <div class="app" id="appView" hidden>
@@ -58,6 +98,7 @@
             <button id="backupBtn">Download backup (JSON)</button>
             <button id="importBtn">Import JSON…</button>
             <button id="reloadBtn">Discard changes &amp; reload</button>
+            <button id="setPwBtn">Username &amp; password…</button>
             <button id="logoutBtn" class="danger">Sign out</button>
           </div>
         </div>
