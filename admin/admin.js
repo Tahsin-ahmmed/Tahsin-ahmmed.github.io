@@ -347,7 +347,8 @@
         { k: 'description', t: 'textarea', l: 'Description' },
         { k: 'email', t: 'text', l: 'Email', half: true }, { k: 'phone', t: 'text', l: 'Phone', half: true },
         { k: 'location', t: 'text', l: 'Address' },
-        { k: 'formEndpoint', t: 'url', l: 'Contact form endpoint', hint: 'Free Formspree form URL (formspree.io). Leave empty to open the visitor\'s email app instead.' }
+        { k: 'formEndpoint', t: 'url', l: 'Contact form endpoint', hint: 'Web3Forms: https://api.web3forms.com/submit (or a Formspree URL). Leave empty to open the visitor\'s email app instead.' },
+        { k: 'formKey', t: 'text', l: 'Web3Forms access key', hint: 'From web3forms.com. Leave empty when using Formspree.' }
       ] }
     ] },
     site: { label: 'Settings', icon: 'globe', blocks: [
